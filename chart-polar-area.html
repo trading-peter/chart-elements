@@ -15,9 +15,9 @@ This type of chart is often useful when we want to show a comparison data simila
 @status alpha
 @homepage http://robdodson.github.io/chart-elements
 -->
-<polymer-element name="chart-polar-area" attributes="values colors">
+<polymer-element name="chart-polar-area" attributes="width height values colors">
   <template>
-    <canvas id="canvas" width="256" height="256"></canvas>
+    <canvas id="canvas" width="{{width}}" height="{{height}}"></canvas>
   </template>
   <script>
     Polymer("chart-polar-area", {

@@ -15,9 +15,9 @@ They are often useful for comparing the points of two or more different data set
 @status alpha
 @homepage http://robdodson.github.io/chart-elements
 -->
-<polymer-element name="chart-radar" attributes="labels values colors">
+<polymer-element name="chart-radar" attributes="width height labels values colors">
   <template>
-    <canvas id="canvas" width="256" height="256"></canvas>
+    <canvas id="canvas" width="{{width}}" height="{{height}}"></canvas>
   </template>
   <script>
     Polymer({

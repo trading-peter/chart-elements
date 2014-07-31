@@ -16,9 +16,9 @@ Often, it is used to show trend data, and the comparison of two data sets.
 @homepage http://robdodson.github.io/chart-elements
 -->
 
-<polymer-element name="chart-line" attributes="labels values colors">
+<polymer-element name="chart-line" attributes="width height labels values colors">
   <template>
-    <canvas id="canvas" width="512" height="256"></canvas>
+    <canvas id="canvas" width="{{width}}" height="{{height}}"></canvas>
   </template>
   <script>
     Polymer({

@@ -19,9 +19,14 @@ They are also registered under two aliases in the Chart core. Other than their d
 @status alpha
 @homepage http://robdodson.github.io/chart-elements
 -->
-<polymer-element name="chart-pie" attributes="values colors">
+<polymer-element name="chart-pie" attributes="width height values colors">
   <template>
-    <canvas id="canvas" width="256" height="256"></canvas>
+    <style>
+    :host {
+      display: inline-block;
+    }
+    </style>
+    <canvas id="canvas" width="{{width}}" height="{{height}}"></canvas>
   </template>
   <script>
     Polymer({

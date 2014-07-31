@@ -19,9 +19,9 @@ They are also registered under two aliases in the Chart core. Other than their d
 @status alpha
 @homepage http://robdodson.github.io/chart-elements
 -->
-<polymer-element name="chart-doughnut" attributes="values colors">
+<polymer-element name="chart-doughnut" attributes="width height values colors">
   <template>
-    <canvas id="canvas" width="256" height="256"></canvas>
+    <canvas id="canvas" width="{{width}}" height="{{height}}"></canvas>
   </template>
   <script>
     Polymer({
