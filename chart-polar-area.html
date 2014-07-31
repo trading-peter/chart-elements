@@ -1,0 +1,37 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="chart-js-import.html">
+
+<!--
+Polar area charts are similar to pie charts, but each segment has the same angle - the radius of the segment differs depending on the value.
+
+This type of chart is often useful when we want to show a comparison data similar to a pie chart, but also show a scale of values for context.
+
+##### Example
+
+    <chart-polar-area values="[30, 90, 18, 58, 82]"></chart-polar-area>
+
+@element chart-polar-area
+@blurb Polar area charts are similar to pie charts, but each segment has the same angle - the radius of the segment differs depending on the value.
+@status alpha
+@homepage http://robdodson.github.io/chart-elements
+-->
+<polymer-element name="chart-polar-area" attributes="values colors">
+  <template>
+    <canvas id="canvas" width="256" height="256"></canvas>
+  </template>
+  <script>
+    Polymer("chart-polar-area", {
+      ready: function () {
+        this.data = [];
+        this.values.forEach(function (val, i) {
+          this.data.push({ color: this.colors[i], value: val });
+        }, this);
+
+        this.ctx = this.$.canvas.getContext('2d');
+        this.chart = new Chart(this.ctx).PolarArea(this.data);
+      },
+      values: [30, 90, 18, 58, 82],
+      colors: ["#46BFBD", "#FDB45C", "#949FB1", "#4D5360", "#F7464A"]
+    });
+  </script>
+</polymer-element>

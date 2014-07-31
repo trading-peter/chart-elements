@@ -1,0 +1,55 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="chart-js-import.html">
+
+<!--
+A bar chart is a way of showing data as bars.
+
+It is sometimes used to show trend data, and the comparison of multiple data sets side by side.
+
+##### Example
+
+    <chart-bar></chart-bar>
+
+@element chart-bar
+@blurb A bar chart is a way of showing data as bars.
+@status alpha
+@homepage http://robdodson.github.io/chart-elements
+-->
+<polymer-element name="chart-bar" attributes="labels values colors">
+  <template>
+    <canvas id="canvas" width="512" height="256"></canvas>
+  </template>
+  <script>
+    Polymer({
+      ready: function () {
+        this.datasets = [];
+        this.values.forEach(function (val, i) {
+          this.datasets.push({
+            fillColor:    "rgba(" + this.colors[i] + ",0.5)",
+            strokeColor:  "rgba(" + this.colors[i] + ",1)",
+            data: this.values[i]
+          });
+        }, this);
+
+        this.data = { labels: this.labels, datasets: this.datasets };
+
+        console.log(this.data);
+
+        this.ctx = this.$.canvas.getContext('2d');
+        this.chart = new Chart(this.ctx).Bar(this.data);
+      },
+      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+      values: [
+        [65,59,90,81,56,55,40],
+        [28,48,40,19,96,27,100]
+      ],
+      colors: [
+        "253,180,92",
+        "247,70,74",
+        "70,191,189",
+        "148,159,177",
+        "77,83,96"
+      ]
+    });
+  </script>
+</polymer-element>

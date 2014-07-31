@@ -1,0 +1,41 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="chart-js-import.html">
+
+<!--
+Pie and doughnut charts are probably the most commonly used chart there are. They are divided into segments, the arc of each segment shows a the proportional value of each piece of data.
+
+They are excellent at showing the relational proportions between data.
+
+Pie and doughnut charts in are effectively the same class in Chart.js, but have one different default value - their percentageInnerCutout. This equates what percentage of the inner should be cut out. This defaults to 0 for pie charts, and 50 for doughnuts.
+
+They are also registered under two aliases in the Chart core. Other than their different default value, and different alias, they are exactly the same.
+
+##### Example
+
+    <chart-pie values="[20, 30, 100]"></chart-pie>
+
+@element chart-pie
+@blurb A chart for showing the relational proportions between data.
+@status alpha
+@homepage http://robdodson.github.io/chart-elements
+-->
+<polymer-element name="chart-pie" attributes="values colors">
+  <template>
+    <canvas id="canvas" width="256" height="256"></canvas>
+  </template>
+  <script>
+    Polymer({
+      ready: function () {
+        this.data = [];
+        this.values.forEach(function (val, i) {
+          this.data.push({ color: this.colors[i], value: val });
+        }, this);
+
+        this.ctx = this.$.canvas.getContext('2d');
+        this.chart = new Chart(this.ctx).Pie(this.data);
+      },
+      values: [30, 50, 100, 40, 120],
+      colors: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360"]
+    });
+  </script>
+</polymer-element>
