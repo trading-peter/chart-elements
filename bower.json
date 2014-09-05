@@ -1,6 +1,6 @@
 {
   "name": "chart-elements",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "keywords": "seed, polymer, web-components",
   "main": "chart-elements.html",
   "dependencies": {
