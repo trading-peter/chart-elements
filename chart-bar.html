@@ -26,6 +26,26 @@ It is sometimes used to show trend data, and the comparison of multiple data set
   <script>
     Polymer({
       ready: function () {
+        updateGraph();
+      },
+      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+      values: [
+        [65,59,90,81,56,55,40],
+        [28,48,40,19,96,27,100]
+      ],
+      colors: [
+        "253,180,92",
+        "247,70,74",
+        "70,191,189",
+        "148,159,177",
+        "77,83,96"
+      ],
+      updateGraph:function(){
+        // clean-up old chart
+        if(this.chart){
+          this.chart.destroy();
+        }
+
         this.datasets = [];
         this.values.forEach(function (val, i) {
           this.datasets.push({
@@ -42,18 +62,15 @@ It is sometimes used to show trend data, and the comparison of multiple data set
         this.ctx = this.$.canvas.getContext('2d');
         this.chart = new Chart(this.ctx).Bar(this.data);
       },
-      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-      values: [
-        [65,59,90,81,56,55,40],
-        [28,48,40,19,96,27,100]
-      ],
-      colors: [
-        "253,180,92",
-        "247,70,74",
-        "70,191,189",
-        "148,159,177",
-        "77,83,96"
-      ]
+      valuesChanged:function(){
+        this.updateGraph();
+      },
+      labelsChanged:function(){
+        this.updateGraph();
+      },
+      colorsChanged:function(){
+        this.updateGraph();
+      }
     });
   </script>
 </polymer-element>
