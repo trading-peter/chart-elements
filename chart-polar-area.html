@@ -24,10 +24,11 @@ This type of chart is often useful when we want to show a comparison data simila
       values: [30, 90, 18, 58, 82],
       colors: ["#46BFBD", "#FDB45C", "#949FB1", "#4D5360", "#F7464A"],
       observe: {
-        colors: 'updateGraph',
-        values: 'updateGraph'
+        labels: 'updateChart',
+        colors: 'updateChart',
+        values: 'updateChart'
       },
-      updateGraph: function () {
+      updateChart: function () {
         if(this.chart){
           this.chart.destroy();
         }

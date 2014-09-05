@@ -33,7 +33,12 @@ They are often useful for comparing the points of two or more different data set
         "148,159,177",
         "77,83,96"
       ],
-      updateGraph: function () {
+      observe: {
+        colors: 'updateChart',
+        values: 'updateChart',
+        labels:
+      },
+      updateChart: function () {
         if(this.chart){
           this.chart.destroy();
         }

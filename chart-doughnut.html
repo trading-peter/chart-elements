@@ -28,10 +28,10 @@ They are also registered under two aliases in the Chart core. Other than their d
       values: [30, 50, 100, 40, 120],
       colors: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360"],
       observe: {
-        colors: 'updateGraph',
-        values: 'updateGraph'
+        colors: 'updateChart',
+        values: 'updateChart'
       },
-      udpateGraph: function () {
+      updateChart: function () {
         if(this.chart){
           this.chart.destroy();
         }
