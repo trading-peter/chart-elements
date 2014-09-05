@@ -38,12 +38,11 @@ It is sometimes used to show trend data, and the comparison of multiple data set
         "77,83,96"
       ],
       observe: {
-        labels: 'updateGraph',
-        colors: 'updateGraph',
-        values: 'updateGraph'
+        labels: 'updateChart',
+        colors: 'updateChart',
+        values: 'updateChart'
       },
-      updateGraph: function() {
-        // clean-up old chart
+      updateChart: function() {
         if (this.chart) {
           this.chart.destroy();
         }
