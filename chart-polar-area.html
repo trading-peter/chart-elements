@@ -28,6 +28,9 @@ This type of chart is often useful when we want to show a comparison data simila
         values: 'updateGraph'
       },
       updateGraph: function () {
+        if(this.chart){
+          this.chart.destroy();
+        }
         this.data = [];
         this.values.forEach(function (val, i) {
           this.data.push({ color: this.colors[i], value: val });
