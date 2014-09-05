@@ -25,23 +25,6 @@ It is sometimes used to show trend data, and the comparison of multiple data set
   </template>
   <script>
     Polymer({
-      ready: function () {
-        this.datasets = [];
-        this.values.forEach(function (val, i) {
-          this.datasets.push({
-            fillColor:    "rgba(" + this.colors[i] + ",0.5)",
-            strokeColor:  "rgba(" + this.colors[i] + ",1)",
-            data: this.values[i]
-          });
-        }, this);
-
-        this.data = { labels: this.labels, datasets: this.datasets };
-
-        console.log(this.data);
-
-        this.ctx = this.$.canvas.getContext('2d');
-        this.chart = new Chart(this.ctx).Bar(this.data);
-      },
       labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
       values: [
         [65,59,90,81,56,55,40],
@@ -53,7 +36,32 @@ It is sometimes used to show trend data, and the comparison of multiple data set
         "70,191,189",
         "148,159,177",
         "77,83,96"
-      ]
+      ],
+      observe: {
+        labels: 'updateGraph',
+        colors: 'updateGraph',
+        values: 'updateGraph'
+      },
+      updateGraph: function() {
+        // clean-up old chart
+        if (this.chart) {
+          this.chart.destroy();
+        }
+
+        this.datasets = [];
+        this.values.forEach(function (val, i) {
+          this.datasets.push({
+            fillColor:    "rgba(" + this.colors[i] + ",0.5)",
+            strokeColor:  "rgba(" + this.colors[i] + ",1)",
+            data: this.values[i]
+          });
+        }, this);
+
+        this.data = { labels: this.labels, datasets: this.datasets };
+
+        this.ctx = this.$.canvas.getContext('2d');
+        this.chart = new Chart(this.ctx).Bar(this.data);
+      }
     });
   </script>
 </polymer-element>
