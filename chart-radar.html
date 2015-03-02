@@ -18,7 +18,7 @@ They are often useful for comparing the points of two or more different data set
 @status alpha
 @homepage http://robdodson.github.io/chart-elements
 -->
-<polymer-element name="chart-radar" attributes="width height labels values colors">
+<polymer-element name="chart-radar" attributes="width height labels values colors options">
   <template>
     <canvas id="canvas" width="{{width}}" height="{{height}}"></canvas>
   </template>
@@ -36,6 +36,7 @@ They are often useful for comparing the points of two or more different data set
         "148,159,177",
         "77,83,96"
       ],
+      options: {},
       observe: {
         colors: 'updateChart',
         values: 'updateChart',
@@ -58,7 +59,7 @@ They are often useful for comparing the points of two or more different data set
 
         this.data = { labels: this.labels, datasets: this.datasets };
         this.ctx = this.$.canvas.getContext('2d');
-        this.chart = new Chart(this.ctx).Radar(this.data);
+        this.chart = new Chart(this.ctx).Radar(this.data, this.options);
       }
     });
   </script>
