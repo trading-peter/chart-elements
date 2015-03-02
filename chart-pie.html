@@ -19,7 +19,7 @@ They are also registered under two aliases in the Chart core. Other than their d
 @status alpha
 @homepage http://robdodson.github.io/chart-elements
 -->
-<polymer-element name="chart-pie" attributes="width height values colors">
+<polymer-element name="chart-pie" attributes="width height values colors options">
   <template>
     <style>
     :host {
@@ -32,6 +32,7 @@ They are also registered under two aliases in the Chart core. Other than their d
     Polymer({
       values: [30, 50, 100, 40, 120],
       colors: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360"],
+      options: {},
       observe: {
         colors: 'updateChart',
         values: 'updateChart'
@@ -46,7 +47,7 @@ They are also registered under two aliases in the Chart core. Other than their d
         }, this);
 
         this.ctx = this.$.canvas.getContext('2d');
-        this.chart = new Chart(this.ctx).Pie(this.data);
+        this.chart = new Chart(this.ctx).Pie(this.data, this.options);
       }
     });
   </script>
