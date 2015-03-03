@@ -1,7 +1,7 @@
 {
   "name": "chart-elements",
   "version": "0.1.1",
-  "keywords": "seed, polymer, web-components",
+  "keywords": ["seed", "polymer", "web-components"],
   "main": "chart-elements.html",
   "dependencies": {
     "polymer": "Polymer/polymer#>=0.4.0 <1.0.0",
