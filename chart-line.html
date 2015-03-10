@@ -40,29 +40,42 @@ Often, it is used to show trend data, and the comparison of two data sets.
       ],
       options: {},
       observe: {
+        width: 'resize',
+        height: 'resize',
         labels: 'updateChart',
         colors: 'updateChart',
-        values: 'updateChart'
+        values: 'updateChart',
+        options: 'updateChart'
       },
-      updateChart:function(){
-        if(this.chart){
-          this.chart.destroy();
+      resize: function() {
+        if (this.chart) {
+          this.updateChart();
         }
+      },
+      updateChart:function() {
+        this.async(function() {
+          if (this.chart) {
+            this.chart.destroy();
+            // Bindings don't seem to be taking effect properly so
+            // manually set width and height
+            this.$.canvas.setAttribute('width', this.width);
+            this.$.canvas.setAttribute('height', this.height);
+          }
+          this.datasets = [];
+          this.values.forEach(function (val, i) {
+            this.datasets.push({
+              fillColor:    "rgba(" + this.colors[i] + ",0.5)",
+              strokeColor:  "rgba(" + this.colors[i] + ",1)",
+              pointColor:   "rgba(" + this.colors[i] + ",1)",
+              pointStrokeColor: "#fff",
+              data: this.values[i]
+            });
+          }, this);
 
-        this.datasets = [];
-        this.values.forEach(function (val, i) {
-          this.datasets.push({
-            fillColor:    "rgba(" + this.colors[i] + ",0.5)",
-            strokeColor:  "rgba(" + this.colors[i] + ",1)",
-            pointColor:   "rgba(" + this.colors[i] + ",1)",
-            pointStrokeColor: "#fff",
-            data: this.values[i]
-          });
-        }, this);
-
-        this.data = { labels: this.labels, datasets: this.datasets };
-        this.ctx = this.$.canvas.getContext('2d');
-        this.chart = new Chart(this.ctx).Line(this.data, this.options);
+          this.data = { labels: this.labels, datasets: this.datasets };
+          this.ctx = this.$.canvas.getContext('2d');
+          this.chart = new Chart(this.ctx).Line(this.data, this.options);
+        }, null, 0);
       }
     });
   </script>

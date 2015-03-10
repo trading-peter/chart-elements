@@ -4,7 +4,7 @@
   "keywords": ["seed", "polymer", "web-components"],
   "main": "chart-elements.html",
   "dependencies": {
-    "polymer": "Polymer/polymer#>=0.4.0 <1.0.0",
-    "chartjs": "~1.0.1-beta.4"
+    "polymer": "Polymer/polymer#^0.5.5",
+    "chartjs": "^1.0.2"
   }
 }

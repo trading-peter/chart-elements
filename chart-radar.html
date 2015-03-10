@@ -38,28 +38,42 @@ They are often useful for comparing the points of two or more different data set
       ],
       options: {},
       observe: {
+        width: 'resize',
+        height: 'resize',
         colors: 'updateChart',
         values: 'updateChart',
-        labels: 'updateChart'
+        labels: 'updateChart',
+        options: 'updateChart'
+      },
+      resize: function() {
+        if (this.chart) {
+          this.updateChart();
+        }
       },
       updateChart: function () {
-        if(this.chart){
-          this.chart.destroy();
-        }
-        this.datasets = [];
-        this.values.forEach(function (val, i) {
-          this.datasets.push({
-            fillColor:    "rgba(" + this.colors[i] + ",0.5)",
-            strokeColor:  "rgba(" + this.colors[i] + ",1)",
-            pointColor:   "rgba(" + this.colors[i] + ",1)",
-            pointStrokeColor: "#fff",
-            data: this.values[i]
-          });
-        }, this);
+        this.async(function() {
+          if (this.chart) {
+            this.chart.destroy();
+            // Bindings don't seem to be taking effect properly so
+            // manually set width and height
+            this.$.canvas.setAttribute('width', this.width);
+            this.$.canvas.setAttribute('height', this.height);
+          }
+          this.datasets = [];
+          this.values.forEach(function (val, i) {
+            this.datasets.push({
+              fillColor:    "rgba(" + this.colors[i] + ",0.5)",
+              strokeColor:  "rgba(" + this.colors[i] + ",1)",
+              pointColor:   "rgba(" + this.colors[i] + ",1)",
+              pointStrokeColor: "#fff",
+              data: this.values[i]
+            });
+          }, this);
 
-        this.data = { labels: this.labels, datasets: this.datasets };
-        this.ctx = this.$.canvas.getContext('2d');
-        this.chart = new Chart(this.ctx).Radar(this.data, this.options);
+          this.data = { labels: this.labels, datasets: this.datasets };
+          this.ctx = this.$.canvas.getContext('2d');
+          this.chart = new Chart(this.ctx).Radar(this.data, this.options);
+        }, null, 0);
       }
     });
   </script>
