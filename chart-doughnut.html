@@ -19,13 +19,14 @@ They are also registered under two aliases in the Chart core. Other than their d
 @status alpha
 @homepage http://robdodson.github.io/chart-elements
 -->
-<polymer-element name="chart-doughnut" attributes="width height values colors options">
+<polymer-element name="chart-doughnut" attributes="width height values colors labels options">
   <template>
     <canvas id="canvas" width="{{width}}" height="{{height}}"></canvas>
   </template>
   <script>
     Polymer({
       values: [30, 50, 100, 40, 120],
+      labels: [],
       colors: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360"],
       options: {},
       observe: {
@@ -51,7 +52,7 @@ They are also registered under two aliases in the Chart core. Other than their d
           }
           this.data = [];
           this.values.forEach(function (val, i) {
-            this.data.push({ color: this.colors[i], value: val });
+            this.data.push({ color: this.colors[i], value: val, label: this.labels[i]?this.labels[i]:'' });
           }, this);
 
           this.ctx = this.$.canvas.getContext('2d');
