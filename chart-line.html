@@ -20,40 +20,64 @@ Often, it is used to show trend data, and the comparison of two data sets.
 @homepage http://robdodson.github.io/chart-elements
 -->
 
-<polymer-element name="chart-line" attributes="width height labels values colors options">
+<dom-module id="chart-line">
   <template>
-    <canvas id="canvas" width="{{width}}" height="{{height}}"></canvas>
+    <canvas id="canvas"></canvas>
   </template>
   <script>
     Polymer({
-      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-      values: [
-        [65,59,90,81,56,55,40],
-        [28,48,40,19,96,27,100]
-      ],
-      colors: [
-        "253,180,92",
-        "247,70,74",
-        "70,191,189",
-        "148,159,177",
-        "77,83,96"
-      ],
-      options: {},
-      observe: {
-        width: 'resize',
-        height: 'resize',
-        labels: 'updateChart',
-        colors: 'updateChart',
-        values: 'updateChart',
-        options: 'updateChart'
+      is: 'chart-line',
+      properties: {
+        colors: {
+          type: Array,
+          value: function () {
+            return [
+              '253,180,92',
+              '247,70,74',
+              '70,191,189',
+              '148,159,177',
+              '77,83,96'
+            ];
+          }
+        },
+        width: Number,
+        height: Number,
+        labels: {
+          type: Array,
+          value: function () {
+            return ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"];
+          }
+        },
+        options: {
+          type: Object,
+          value: function () {
+            return {};
+          }
+        },
+        values: {
+          type: Array,
+          value: function () {
+            return [
+              [65,59,90,81,56,55,40],
+              [28,48,40,19,96,27,100]
+            ];
+          }
+        }
       },
-      resize: function() {
+      observers: [
+        'updateChart(values, labels, colors, options)',
+        'resize(width, height)'
+      ],
+      attached: function() {
+        this.resize();
+      },
+      resize: function () {
         if (this.chart) {
           this.updateChart();
         }
       },
-      updateChart:function() {
-        this.async(function() {
+      updateChart: function () {
+        this.async(function () {
           if (this.chart) {
             this.chart.destroy();
             // Bindings don't seem to be taking effect properly so
@@ -61,15 +85,14 @@ Often, it is used to show trend data, and the comparison of two data sets.
             this.$.canvas.setAttribute('width', this.width);
             this.$.canvas.setAttribute('height', this.height);
           }
-          this.datasets = [];
-          this.values.forEach(function (val, i) {
-            this.datasets.push({
-              fillColor:    "rgba(" + this.colors[i] + ",0.5)",
-              strokeColor:  "rgba(" + this.colors[i] + ",1)",
-              pointColor:   "rgba(" + this.colors[i] + ",1)",
-              pointStrokeColor: "#fff",
+          this.datasets = this.values.map(function (val, i) {
+            return {
+              fillColor: 'rgba(' + this.colors[i] + ',0.5)',
+              strokeColor: 'rgba(' + this.colors[i] + ',1)',
+              pointColor: 'rgba(' + this.colors[i] + ',1)',
+              pointStrokeColor: '#fff',
               data: this.values[i]
-            });
+            };
           }, this);
 
           this.data = { labels: this.labels, datasets: this.datasets };
@@ -79,4 +102,4 @@ Often, it is used to show trend data, and the comparison of two data sets.
       }
     });
   </script>
-</polymer-element>
+</dom-module>
