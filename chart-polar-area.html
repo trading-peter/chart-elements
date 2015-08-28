@@ -15,30 +15,55 @@ This type of chart is often useful when we want to show a comparison data simila
 @status alpha
 @homepage http://robdodson.github.io/chart-elements
 -->
-<polymer-element name="chart-polar-area" attributes="width height values colors options">
+<dom-module id="chart-polar-area">
   <template>
-    <canvas id="canvas" width="{{width}}" height="{{height}}"></canvas>
+    <canvas id="canvas"></canvas>
   </template>
   <script>
-    Polymer("chart-polar-area", {
-      values: [30, 90, 18, 58, 82],
-      colors: ["#46BFBD", "#FDB45C", "#949FB1", "#4D5360", "#F7464A"],
-      options: {},
-      observe: {
-        width: 'resize',
-        height: 'resize',
-        labels: 'updateChart',
-        colors: 'updateChart',
-        values: 'updateChart',
-        options: 'updateChart'
+    Polymer({
+      is: 'chart-polar-area',
+      properties: {
+        colors: {
+          type: Array,
+          value: function () {
+            return ["#46BFBD", "#FDB45C", "#949FB1", "#4D5360", "#F7464A"];
+          }
+        },
+        width: Number,
+        height: Number,
+        labels: {
+          type: Array,
+          value: function () {
+            return [];
+          }
+        },
+        options: {
+          type: Object,
+          value: function () {
+            return {};
+          }
+        },
+        values: {
+          type: Array,
+          value: function () {
+            return [30, 90, 18, 58, 82];
+          }
+        }
       },
-      resize: function() {
+      observers: [
+        'updateChart(values, labels, colors, options)',
+        'resize(width, height)'
+      ],
+      attached: function() {
+        this.resize();
+      },
+      resize: function () {
         if (this.chart) {
           this.updateChart();
         }
       },
       updateChart: function () {
-        this.async(function() {
+        this.async(function () {
           if (this.chart) {
             this.chart.destroy();
             // Bindings don't seem to be taking effect properly so
@@ -46,15 +71,13 @@ This type of chart is often useful when we want to show a comparison data simila
             this.$.canvas.setAttribute('width', this.width);
             this.$.canvas.setAttribute('height', this.height);
           }
-          this.data = [];
-          this.values.forEach(function (val, i) {
-            this.data.push({ color: this.colors[i], value: val });
+          this.data = this.values.map(function (val, i) {
+            return { color: this.colors[i], value: val };
           }, this);
-
           this.ctx = this.$.canvas.getContext('2d');
           this.chart = new Chart(this.ctx).PolarArea(this.data, this.options);
         }, null, 0);
       }
     });
   </script>
-</polymer-element>
+</dom-module>
