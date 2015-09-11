@@ -75,7 +75,10 @@ This type of chart is often useful when we want to show a comparison data simila
             return { color: this.colors[i], value: val };
           }, this);
           this.ctx = this.$.canvas.getContext('2d');
-          this.chart = new Chart(this.ctx).PolarArea(this.data, this.options);
+          var self = this;
+          setTimeout(function(){
+            self.chart = new Chart(self.ctx).PolarArea(self.data, self.options);
+          },0);
         }, null, 0);
       }
     });
