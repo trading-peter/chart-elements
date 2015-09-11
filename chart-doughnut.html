@@ -79,7 +79,10 @@ They are also registered under two aliases in the Chart core. Other than their d
             return { color: this.colors[i], value: val };
           }, this);
           this.ctx = this.$.canvas.getContext('2d');
-          this.chart = new Chart(this.ctx).Doughnut(this.data, this.options);
+          var self = this;
+          setTimeout(function(){
+            self.chart = new Chart(self.ctx).Doughnut(self.data, self.options);
+          },0);
         }, null, 0);
       }
     });

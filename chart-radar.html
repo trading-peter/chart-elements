@@ -94,7 +94,10 @@ They are often useful for comparing the points of two or more different data set
           }, this);
           this.data = { labels: this.labels, datasets: this.datasets };
           this.ctx = this.$.canvas.getContext('2d');
-          this.chart = new Chart(this.ctx).Radar(this.data, this.options);
+          var self = this;
+          setTimeout(function(){
+            self.chart = new Chart(self.ctx).Radar(self.data, self.options);
+          },0);
         }, null, 0);
       }
     });

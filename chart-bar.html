@@ -96,7 +96,10 @@ It is sometimes used to show trend data, and the comparison of multiple data set
             datasets: this.datasets
           };
           this.ctx = this.$.canvas.getContext('2d');
-          this.chart = new Chart(this.ctx).Bar(this.data, this.options);
+          var self = this;
+          setTimeout(function(){
+            self.chart = new Chart(self.ctx).Bar(self.data, self.options);
+          },0);
         }, null, 0);
       }
     });
