@@ -1,4 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="chart-js-import.html">
 
 <!--
@@ -10,8 +11,8 @@ Often, it is used to show trend data, and the comparison of two data sets.
 
     <chart-line width="400" height="200"
                 labels="['Monday','Tuesday','Wednesday','thursday','Friday','Saturday','Sunday']"
-                values="[ [10,14,20,25,13,9,40] ]"
-                colors='["253,180,92","247,70,74","70,191,189","148,159,177","77,83,96"]'>
+                values='[{"seriesLabel":"The week that was", "data":[10,14,20,25,13,9,40]}]'
+                colors="['253,180,92','247,70,74','70,191,189','148,159,177','77,83,96']">
     </chart-line>
 
 @element chart-line
@@ -23,6 +24,7 @@ Often, it is used to show trend data, and the comparison of two data sets.
 <dom-module id="chart-line">
   <template>
     <canvas id="canvas"></canvas>
+    <div id="legend"></div>
   </template>
   <script>
     Polymer({
@@ -32,11 +34,11 @@ Often, it is used to show trend data, and the comparison of two data sets.
           type: Array,
           value: function () {
             return [
-              "253,180,92",
-              "247,70,74",
-              "70,191,189",
-              "148,159,177",
-              "77,83,96"
+              '253,180,92',
+              '247,70,74',
+              '70,191,189',
+              '148,159,177',
+              '77,83,96'
             ];
           }
         },
@@ -58,10 +60,14 @@ Often, it is used to show trend data, and the comparison of two data sets.
           type: Array,
           value: function () {
             return [
-              [65,59,90,81,56,55,40],
-              [28,48,40,19,96,27,100]
+              {"seriesLabel":"2014", "data":[65,59,90,81,56,55,40]},
+              {"seriesLabel":"2015", "data":[28,48,40,19,96,27,100]}
             ];
           }
+        },
+        legend: {
+          type: Boolean,
+          value: false
         }
       },
       observers: [
@@ -91,17 +97,27 @@ Often, it is used to show trend data, and the comparison of two data sets.
               strokeColor: 'rgba(' + this.colors[i] + ',1)',
               pointColor: 'rgba(' + this.colors[i] + ',1)',
               pointStrokeColor: '#fff',
-              data: this.values[i]
+              data: this.values[i].data
             };
           }, this);
 
           this.data = { labels: this.labels, datasets: this.datasets };
           this.ctx = this.$.canvas.getContext('2d');
-          var self = this;
-          setTimeout(function(){
-            self.chart = new Chart(self.ctx).Line(self.data, self.options);
-          },0);
+          this.chart = new Chart(this.ctx).Line(this.data, this.options);
         }, null, 0);
+        if (this.legend) {
+          this.generateLegend();
+        }
+      },
+      generateLegend: function() {
+        var legendHTML = "<div class='layout center horizontal'>";
+        for (var i = 0; i < this.values.length; i++) {
+          legendHTML += "<div style=\"background-color: rgba(" + this.colors[i]
+            + ", 1); height: 20px; width: 20px; float: left; margin: 5px;\"></div><p>"
+            + this.values[i].seriesLabel + "</p>";
+        }
+        legendHTML += "</div>";
+        this.$.legend.innerHTML = legendHTML;
       }
     });
   </script>

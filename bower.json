@@ -9,7 +9,8 @@
   "main": "chart-elements.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^1.0.0",
-    "chartjs": "^1.0.2"
+    "chartjs": "^1.0.2",
+    "iron-flex-layout": "PolymerElements/iron-flex-layout"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0"
