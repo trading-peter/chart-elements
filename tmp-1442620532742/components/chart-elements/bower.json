@@ -1,0 +1,17 @@
+{
+  "name": "chart-elements",
+  "version": "0.2.0",
+  "keywords": [
+    "seed",
+    "polymer",
+    "web-components"
+  ],
+  "main": "chart-elements.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.0.0",
+    "chartjs": "^1.0.2"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0"
+  }
+}

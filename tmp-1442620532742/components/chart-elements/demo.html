@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>chart-elements Demo</title>
+
+  <script src="../webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="chart-elements.html">
+
+</head>
+<body unresolved>
+
+  <chart-pie
+      width="200"
+      height="200"
+      values="[20, 30, 100]">
+  </chart-pie>
+
+  <chart-doughnut
+      width="200"
+      height="200"
+      values="[30, 50, 100, 40, 120]">
+  </chart-doughnut>
+
+  <chart-polar-area
+      width="200"
+      height="200"
+      values="[30, 90, 18, 58, 82]">
+  </chart-polar-area>
+
+  <chart-radar labels='["Jan","Feb","Mar","Apr","May","Jun","Jul"]'
+               values="[[65,59,90,81,56,55,40], [28,48,40,19,96,27,100]]"
+               colors= '["253,180,92","247,70,74","70,191,189","148,159,177","77,83,96"]'>
+  </chart-radar>
+  <br>
+
+  <chart-line
+      width="400"
+      height="200"
+      labels='["Monday","Tuesday","Wednesday","thursday","Friday","Saturday","Sunday"]'
+      values="[[10,14,20,25,13,9,40]]"
+      colors='["253,180,92","247,70,74","70,191,189","148,159,177","77,83,96"]'>
+  </chart-line>
+
+  <chart-bar
+      width="400"
+      height="200"
+      labels='["Jan","Feb","Mar","Apr","May","Jun","Jul"]'
+      values="[[65,59,90,81,56,55,40], [28,48,40,19,96,27,100]]"
+      colors='["253,180,92","247,70,74","70,191,189","148,159,177","77,83,96"]'>
+  </chart-bar>
+</body>
+</html>

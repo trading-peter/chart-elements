@@ -1,0 +1,90 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="chart-js-import.html">
+
+<!--
+Pie and doughnut charts are probably the most commonly used chart there are. They are divided into segments, the arc of each segment shows a the proportional value of each piece of data.
+
+They are excellent at showing the relational proportions between data.
+
+Pie and doughnut charts in are effectively the same class in Chart.js, but have one different default value - their percentageInnerCutout. This equates what percentage of the inner should be cut out. This defaults to 0 for pie charts, and 50 for doughnuts.
+
+They are also registered under two aliases in the Chart core. Other than their different default value, and different alias, they are exactly the same.
+
+##### Example
+
+    <chart-doughnut values="[30, 50, 100, 40, 120]"></chart-doughnut>
+
+@element chart-doughnut
+@blurb A chart for showing the relational proportions between data.
+@status alpha
+@homepage http://robdodson.github.io/chart-elements
+-->
+<dom-module id="chart-doughnut">
+  <template>
+    <canvas id="canvas"></canvas>
+  </template>
+  <script>
+    Polymer({
+      is: 'chart-doughnut',
+      properties: {
+        colors: {
+          type: Array,
+          value: function () {
+            return ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360"];
+          }
+        },
+        width: Number,
+        height: Number,
+        labels: {
+          type: Array,
+          value: function () {
+            return [];
+          }
+        },
+        options: {
+          type: Object,
+          value: function () {
+            return {};
+          }
+        },
+        values: {
+          type: Array,
+          value: function () {
+            return [30, 50, 100, 40, 120];
+          }
+        }
+      },
+      observers: [
+        'updateChart(values, labels, colors, options)',
+        'resize(width, height)'
+      ],
+      attached: function() {
+        this.resize();
+      },
+      resize: function () {
+        if (this.chart) {
+          this.updateChart();
+        }
+      },
+      updateChart: function () {
+        this.async(function () {
+          if (this.chart) {
+            this.chart.destroy();
+            // Bindings don't seem to be taking effect properly so
+            // manually set width and height
+            this.$.canvas.setAttribute('width', this.width);
+            this.$.canvas.setAttribute('height', this.height);
+          }
+          this.data = this.values.map(function (val, i) {
+            return { color: this.colors[i], value: val };
+          }, this);
+          this.ctx = this.$.canvas.getContext('2d');
+          var self = this;
+          setTimeout(function(){
+            self.chart = new Chart(self.ctx).Doughnut(self.data, self.options);
+          },0);
+        }, null, 0);
+      }
+    });
+  </script>
+</dom-module>

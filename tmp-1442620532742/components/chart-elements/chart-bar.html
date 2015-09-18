@@ -1,0 +1,107 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="chart-js-import.html">
+
+<!--
+A bar chart is a way of showing data as bars.
+
+It is sometimes used to show trend data, and the comparison of multiple data sets side by side.
+
+##### Example
+
+    <chart-bar width="400" height="200"
+               labels="['Jan','Feb','Mar','Apr','May','Jun','Jul']",
+               values="[[65,59,90,81,56,55,40], [28,48,40,19,96,27,100]]"
+               colors="['253,180,92','247,70,74','70,191,189','148,159,177','77,83,96']">
+    </chart-bar>
+
+@element chart-bar
+@blurb A bar chart is a way of showing data as bars.
+@status alpha
+@homepage http://robdodson.github.io/chart-elements
+-->
+<dom-module id="chart-bar">
+  <template>
+    <canvas id="canvas"></canvas>
+  </template>
+  <script>
+    Polymer({
+      is: 'chart-bar',
+      properties: {
+        colors: {
+          type: Array,
+          value: function () {
+            return [
+              '253,180,92',
+              '247,70,74',
+              '70,191,189',
+              '148,159,177',
+              '77,83,96'
+            ];
+          }
+        },
+        width: Number,
+        height: Number,
+        labels: {
+          type: Array,
+          value: function () {
+            return ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"];
+          }
+        },
+        options: {
+          type: Object,
+          value: function () {
+            return {};
+          }
+        },
+        values: {
+          type: Array,
+          value: function () {
+            return [
+              [65,59,90,81,56,55,40],
+              [28,48,40,19,96,27,100]
+            ];
+          }
+        }
+      },
+      observers: [
+        'updateChart(values, labels, colors, options)',
+        'resize(width, height)'
+      ],
+      attached: function() {
+        this.resize();
+      },
+      resize: function () {
+        if (this.chart) {
+          this.updateChart();
+        }
+      },
+      updateChart: function () {
+        this.async(function () {
+          if (this.chart) {
+            this.chart.destroy();
+            // Bindings don't seem to be taking effect properly so
+            // manually set width and height
+            this.$.canvas.setAttribute('width', this.width);
+            this.$.canvas.setAttribute('height', this.height);
+          }
+          this.datasets = this.values.map(function (val, i) {
+            return {
+              fillColor: 'rgba(' + this.colors[i] + ',0.5)',
+              strokeColor: 'rgba(' + this.colors[i] + ',1)',
+              data: this.values[i]
+            };
+          }, this);
+          this.data = {
+            labels: this.labels,
+            datasets: this.datasets
+          };
+          this.ctx = this.$.canvas.getContext('2d');
+          var self = this;
+          setTimeout(function(){
+            self.chart = new Chart(self.ctx).Bar(self.data, self.options);
+          },0);
+        }, null, 0);
+      }
+    });
+  </script>
+</dom-module>
