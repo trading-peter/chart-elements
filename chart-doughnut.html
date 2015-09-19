@@ -61,7 +61,11 @@ They are also registered under two aliases in the Chart core. Other than their d
 
       is: 'chart-doughnut',
 
-      behaviors: [BasicPropertiesBehavior, ContextBehavior, ResizeBehavior],
+      behaviors: [
+        ChartBehaviors.BasicPropertiesBehavior,
+        ChartBehaviors.ContextBehavior,
+        ChartBehaviors.ResizeBehavior
+      ],
 
       updateChart: function () {
 

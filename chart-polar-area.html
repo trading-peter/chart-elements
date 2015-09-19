@@ -69,7 +69,11 @@ This type of chart is often useful when we want to show a comparison data simila
 
       is: 'chart-polar-area',
 
-      behaviors: [BasicPropertiesBehavior, ContextBehavior, ResizeBehavior],
+      behaviors: [
+        ChartBehaviors.BasicPropertiesBehavior,
+        ChartBehaviors.ContextBehavior,
+        ChartBehaviors.ResizeBehavior
+      ],
 
       updateChart: function () {
 

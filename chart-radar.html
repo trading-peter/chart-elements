@@ -63,7 +63,11 @@ They are often useful for comparing the points of two or more different data set
 
       is: 'chart-radar',
 
-      behaviors: [AdvancedPropertiesBehavior, ContextBehavior, ResizeBehavior],
+      behaviors: [
+        ChartBehaviors.AdvancedPropertiesBehavior,
+        ChartBehaviors.ContextBehavior,
+        ChartBehaviors.ResizeBehavior
+      ],
 
       updateChart: function () {
 

@@ -1,6 +1,9 @@
 <script>
-
-  ResizeBehavior = {
+  ChartBehaviors = ChartBehaviors || {};
+  /**
+   * @polymerBehavior
+   */
+  ChartBehaviors.ResizeBehavior = {
 
     resize: function() {
       if (this.chart) {

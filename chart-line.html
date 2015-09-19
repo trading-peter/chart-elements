@@ -62,7 +62,11 @@ Often, it is used to show trend data, and the comparison of two data sets.
 
       is: 'chart-line',
 
-      behaviors: [AdvancedPropertiesBehavior, ContextBehavior, ResizeBehavior],
+      behaviors: [
+        ChartBehaviors.AdvancedPropertiesBehavior,
+        ChartBehaviors.ContextBehavior,
+        ChartBehaviors.ResizeBehavior
+      ],
 
       updateChart: function () {
 
