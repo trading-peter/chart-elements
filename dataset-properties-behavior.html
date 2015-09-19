@@ -1,9 +1,9 @@
+<link rel="import" href="chart-property-behavior.html">
+
 <script>
   ChartBehaviors = ChartBehaviors || {};
-  /**
-   * @polymerBehavior
-   */
-  ChartBehaviors.AdvancedPropertiesBehavior = {
+  /** @polymerBehavior */
+  ChartBehaviors.DatasetPropertiesBehaviorImpl = {
 
     properties: {
 
@@ -28,5 +28,11 @@
     ]
 
   };
+
+  /** @polymerBehavior */
+  ChartBehaviors.DatasetPropertiesBehavior = [
+    ChartBehaviors.DatasetPropertiesBehaviorImpl,
+    ChartBehaviors.ChartPropertyBehavior
+  ];
 
 </script>
