@@ -1,5 +1,6 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="chart-js-import.html">
+<link rel="import" href="basic-properties-behavior.html">
 <link rel="import" href="context-behavior.html">
 <link rel="import" href="resize-behavior.html">
 
@@ -68,29 +69,7 @@ This type of chart is often useful when we want to show a comparison data simila
 
       is: 'chart-polar-area',
 
-      behaviors: [ContextBehavior, ResizeBehavior],
-
-      properties: {
-
-        data: {
-          type: Array,
-          value: function () {
-            return [];
-          }
-        },
-
-        options: {
-          type: Object,
-          value: function () {
-            return {};
-          }
-        },
-
-      },
-
-      observers: [
-        'updateChart(data.*, options)'
-      ],
+      behaviors: [BasicPropertiesBehavior, ContextBehavior, ResizeBehavior],
 
       updateChart: function () {
 
