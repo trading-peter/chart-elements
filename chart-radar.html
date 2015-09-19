@@ -1,5 +1,9 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="chart-js-import.html">
+<link rel="import" href="advanced-properties-behavior.html">
+<link rel="import" href="context-behavior.html">
+<link rel="import" href="resize-behavior.html">
+
 
 <!--
 A radar chart is a way of showing multiple data points and the variation between them.
@@ -8,97 +12,75 @@ They are often useful for comparing the points of two or more different data set
 
 ##### Example
 
-    <chart-radar labels="['Jan','Feb','Mar','Apr','May','Jun','Jul']"
-                 values="[[65,59,90,81,56,55,40], [28,48,40,19,96,27,100]]",
-                 colors= "['253,180,92','247,70,74','70,191,189','148,159,177','77,83,96']">
-    </chart-radar>
+    <chart-radar data="[[data]]"></chart-radar>
+
+    ...
+
+    this.data = {
+      labels: ["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"],
+      datasets: [
+        {
+          label: "My First dataset",
+          fillColor: "rgba(220,220,220,0.2)",
+          strokeColor: "rgba(220,220,220,1)",
+          pointColor: "rgba(220,220,220,1)",
+          pointStrokeColor: "#fff",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(220,220,220,1)",
+          data: [65, 59, 90, 81, 56, 55, 40]
+        },
+        {
+          label: "My Second dataset",
+          fillColor: "rgba(151,187,205,0.2)",
+          strokeColor: "rgba(151,187,205,1)",
+          pointColor: "rgba(151,187,205,1)",
+          pointStrokeColor: "#fff",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(151,187,205,1)",
+          data: [28, 48, 40, 19, 96, 27, 100]
+        }
+      ]
+    };
 
 @group Chart Elements
 @element chart-radar
 @demo demo/chart-radar.html
 -->
+
+<link rel="import" href="chart-styles.html">
 <dom-module id="chart-radar">
+
   <template>
+
+    <style include="chart-styles"></style>
+
     <canvas id="canvas"></canvas>
+
   </template>
+
   <script>
     Polymer({
+
       is: 'chart-radar',
-      properties: {
-        colors: {
-          type: Array,
-          value: function () {
-            return [
-              '253,180,92',
-              '247,70,74',
-              '70,191,189',
-              '148,159,177',
-              '77,83,96'
-            ];
-          }
-        },
-        width: Number,
-        height: Number,
-        labels: {
-          type: Array,
-          value: function () {
-            return ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"];
-          }
-        },
-        options: {
-          type: Object,
-          value: function () {
-            return {};
-          }
-        },
-        values: {
-          type: Array,
-          value: function () {
-            return [
-              [65,59,90,81,56,55,40],
-              [28,48,40,19,96,27,100]
-            ];
-          }
-        }
-      },
-      observers: [
-        'updateChart(values, labels, colors, options)',
-        'resize(width, height)'
-      ],
-      attached: function() {
-        this.resize();
-      },
-      resize: function () {
-        if (this.chart) {
-          this.updateChart();
-        }
-      },
+
+      behaviors: [AdvancedPropertiesBehavior, ContextBehavior, ResizeBehavior],
+
       updateChart: function () {
+
         this.async(function () {
+
           if (this.chart) {
             this.chart.destroy();
-            // Bindings don't seem to be taking effect properly so
-            // manually set width and height
-            this.$.canvas.setAttribute('width', this.width);
-            this.$.canvas.setAttribute('height', this.height);
           }
-          this.datasets = this.values.map(function (val, i) {
-            return {
-              fillColor: 'rgba(' + this.colors[i] + ',0.5)',
-              strokeColor: 'rgba(' + this.colors[i] + ',1)',
-              pointColor: 'rgba(' + this.colors[i] + ',1)',
-              pointStrokeColor: '#fff',
-              data: this.values[i]
-            };
-          }, this);
-          this.data = { labels: this.labels, datasets: this.datasets };
-          this.ctx = this.$.canvas.getContext('2d');
-          var self = this;
-          setTimeout(function(){
-            self.chart = new Chart(self.ctx).Radar(self.data, self.options);
-          },0);
+
+          this.async(function() {
+            this.chart = new Chart(this.ctx).Radar(this.data, this.options);
+          }, null, 0);
+
         }, null, 0);
+
       }
+
     });
   </script>
 </dom-module>
