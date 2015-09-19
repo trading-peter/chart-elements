@@ -1,0 +1,29 @@
+<script>
+
+  BasicPropertiesBehavior = {
+
+    properties: {
+
+      data: {
+        type: Array,
+        value: function () {
+          return [];
+        }
+      },
+
+      options: {
+        type: Object,
+        value: function () {
+          return {};
+        }
+      },
+
+    },
+
+    observers: [
+      'updateChart(data.*, options)'
+    ]
+
+  };
+
+</script>

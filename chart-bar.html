@@ -1,5 +1,6 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="chart-js-import.html">
+<link rel="import" href="resize-behavior.html">
 
 <!--
 A bar chart is a way of showing data as bars.
@@ -14,19 +15,35 @@ It is sometimes used to show trend data, and the comparison of multiple data set
                colors="['253,180,92','247,70,74','70,191,189','148,159,177','77,83,96']">
     </chart-bar>
 
+@group Chart Elements
 @element chart-bar
-@blurb A bar chart is a way of showing data as bars.
-@status alpha
-@homepage http://robdodson.github.io/chart-elements
+@demo demo/chart-bar.html
 -->
 <dom-module id="chart-bar">
+
   <template>
+
+    <style>
+      :host {
+        display: inline-block;
+      }
+      #canvas {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+
     <canvas id="canvas"></canvas>
+
   </template>
+
   <script>
     Polymer({
+
       is: 'chart-bar',
+
       properties: {
+
         colors: {
           type: Array,
           value: function () {
@@ -39,20 +56,21 @@ It is sometimes used to show trend data, and the comparison of multiple data set
             ];
           }
         },
-        width: Number,
-        height: Number,
+
         labels: {
           type: Array,
           value: function () {
             return ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"];
           }
         },
+
         options: {
           type: Object,
           value: function () {
             return {};
           }
         },
+
         values: {
           type: Array,
           value: function () {
@@ -63,26 +81,19 @@ It is sometimes used to show trend data, and the comparison of multiple data set
           }
         }
       },
+
       observers: [
-        'updateChart(values, labels, colors, options)',
-        'resize(width, height)'
+        'updateChart(values, labels, colors, options)'
       ],
+
       attached: function() {
-        this.resize();
+        this.updateChart();
       },
-      resize: function () {
-        if (this.chart) {
-          this.updateChart();
-        }
-      },
+
       updateChart: function () {
         this.async(function () {
           if (this.chart) {
             this.chart.destroy();
-            // Bindings don't seem to be taking effect properly so
-            // manually set width and height
-            this.$.canvas.setAttribute('width', this.width);
-            this.$.canvas.setAttribute('height', this.height);
           }
           this.datasets = this.values.map(function (val, i) {
             return {
@@ -104,4 +115,5 @@ It is sometimes used to show trend data, and the comparison of multiple data set
       }
     });
   </script>
+
 </dom-module>
