@@ -24,7 +24,7 @@ Often, it is used to show trend data, and the comparison of two data sets.
 <dom-module id="chart-line">
   <template>
     <canvas id="canvas"></canvas>
-    <div id="legend"></div>
+    <div id="legend" class="layout vertical center"></div>
   </template>
   <script>
     Polymer({
@@ -110,7 +110,7 @@ Often, it is used to show trend data, and the comparison of two data sets.
         }
       },
       generateLegend: function() {
-        var legendHTML = "<div class='layout center horizontal'>";
+        var legendHTML = "<div class=\"layout horizontal center\">";
         for (var i = 0; i < this.values.length; i++) {
           legendHTML += "<div style=\"background-color: rgba(" + this.colors[i]
             + ", 1); height: 20px; width: 20px; float: left; margin: 5px;\"></div><p>"
