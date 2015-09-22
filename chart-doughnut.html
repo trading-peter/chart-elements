@@ -1,5 +1,8 @@
-<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="bower_components/polymer/polymer.html">
 <link rel="import" href="chart-js-import.html">
+<link rel="import" href="data-properties-behavior.html">
+<link rel="import" href="context-behavior.html">
+<link rel="import" href="resize-behavior.html">
 
 <!--
 Pie and doughnut charts are probably the most commonly used chart there are. They are divided into segments, the arc of each segment shows a the proportional value of each piece of data.
@@ -12,79 +15,75 @@ They are also registered under two aliases in the Chart core. Other than their d
 
 ##### Example
 
-    <chart-doughnut values="[30, 50, 100, 40, 120]"></chart-doughnut>
+    <chart-doughnut values="{{data}}"></chart-doughnut>
 
+    ...
+
+    this.data = [
+      {
+        value: 300,
+        color:"#F7464A",
+        highlight: "#FF5A5E",
+        label: "Red"
+      },
+      {
+        value: 50,
+        color: "#46BFBD",
+        highlight: "#5AD3D1",
+        label: "Green"
+      },
+      {
+        value: 100,
+        color: "#FDB45C",
+        highlight: "#FFC870",
+        label: "Yellow"
+      }
+    ];
+
+@group Chart Elements
 @element chart-doughnut
-@blurb A chart for showing the relational proportions between data.
-@status alpha
-@homepage http://robdodson.github.io/chart-elements
+@demo demo/chart-doughnut.html
 -->
+
+<link rel="import" href="chart-styles.html">
 <dom-module id="chart-doughnut">
+
   <template>
+
+    <style include="chart-styles"></style>
+
     <canvas id="canvas"></canvas>
+
   </template>
+
   <script>
     Polymer({
+
       is: 'chart-doughnut',
-      properties: {
-        colors: {
-          type: Array,
-          value: function () {
-            return ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360"];
-          }
-        },
-        width: Number,
-        height: Number,
-        labels: {
-          type: Array,
-          value: function () {
-            return [];
-          }
-        },
-        options: {
-          type: Object,
-          value: function () {
-            return {};
-          }
-        },
-        values: {
-          type: Array,
-          value: function () {
-            return [30, 50, 100, 40, 120];
-          }
-        }
-      },
-      observers: [
-        'updateChart(values, labels, colors, options)',
-        'resize(width, height)'
+
+      behaviors: [
+        ChartBehaviors.DataPropertiesBehavior,
+        ChartBehaviors.ContextBehavior,
+        ChartBehaviors.ResizeBehavior
       ],
-      attached: function() {
-        this.resize();
-      },
-      resize: function () {
-        if (this.chart) {
-          this.updateChart();
-        }
-      },
+
       updateChart: function () {
+
         this.async(function () {
+
           if (this.chart) {
             this.chart.destroy();
-            // Bindings don't seem to be taking effect properly so
-            // manually set width and height
-            this.$.canvas.setAttribute('width', this.width);
-            this.$.canvas.setAttribute('height', this.height);
           }
-          this.data = this.values.map(function (val, i) {
-            return { color: this.colors[i], value: val };
-          }, this);
-          this.ctx = this.$.canvas.getContext('2d');
-          var self = this;
-          setTimeout(function(){
-            self.chart = new Chart(self.ctx).Doughnut(self.data, self.options);
-          },0);
+
+          this.async(function() {
+            this.chart = new Chart(this.ctx).Doughnut(this.data, this.options);
+          }, null, 0);
+
         }, null, 0);
+
       }
+
     });
   </script>
+
 </dom-module>

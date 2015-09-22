@@ -1,0 +1,34 @@
+<link rel="import" href="bower_components/iron-flex-layout/iron-flex-layout.html">
+<script>
+  var ChartBehaviors = ChartBehaviors || {};
+  /** @polymerBehavior */
+  ChartBehaviors.LegendBehavior = {
+
+    properties: {
+
+      legend: {
+        type: Boolean,
+        value: false
+      }
+
+    },
+
+
+    //TODO add custom styling injection for datasets box, as well as the label.
+    //fixme work out why layout is not being applied.
+    generateLegend: function() {
+      var legendHTML = "<div class=\"layout horizontal center\">";
+      for (var i = 0; i < this.data.datasets.length; i++) {
+        legendHTML += "<div class=\"layout horizontal\">"
+          + "<div style=\"background-color: " + this.data.datasets[i].pointColor +";"
+          + "height: 20px; width: 20px; float: left; margin: 5px;\"></div>"
+          + "<p>" + this.data.datasets[i].label + "</p>"
+          + "</div>";
+      }
+      legendHTML += "</div>";
+      return legendHTML;
+    }
+
+  };
+
+</script>

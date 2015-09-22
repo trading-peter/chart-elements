@@ -1,0 +1,15 @@
+<script>
+  var ChartBehaviors = ChartBehaviors || {};
+  /** @polymerBehavior */
+  ChartBehaviors.ResizeBehavior = {
+
+    resize: function() {
+      if (this.chart) {
+        this.chart.resize();
+        this.chart.render(true);
+      }
+    }
+
+  };
+
+</script>

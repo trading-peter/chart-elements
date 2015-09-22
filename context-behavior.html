@@ -1,0 +1,12 @@
+<script>
+  var ChartBehaviors = ChartBehaviors || {};
+  /** @polymerBehavior */
+  ChartBehaviors.ContextBehavior = {
+
+    attached: function() {
+      this.ctx = this.$.canvas.getContext('2d');
+    }
+
+  };
+
+</script>

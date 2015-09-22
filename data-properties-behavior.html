@@ -1,0 +1,37 @@
+<link rel="import" href="chart-property-behavior.html">
+
+<script>
+  var ChartBehaviors = ChartBehaviors || {};
+  /** @polymerBehavior */
+  ChartBehaviors.DataPropertiesBehaviorImpl = {
+
+    properties: {
+
+      data: {
+        type: Array,
+        value: function () {
+          return [];
+        }
+      },
+
+      options: {
+        type: Object,
+        value: function () {
+          return {};
+        }
+      },
+
+    },
+
+    observers: [
+      'updateChart(data.*, options.*)'
+    ]
+
+  };
+
+  /** @polymerBehavior */
+ ChartBehaviors.DataPropertiesBehavior = [
+   ChartBehaviors.DataPropertiesBehaviorImpl,
+   ChartBehaviors.ChartPropertyBehavior
+ ];
+</script>

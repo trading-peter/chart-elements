@@ -1,6 +1,9 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="chart-js-import.html">
+<link rel="import" href="dataset-properties-behavior.html">
+<link rel="import" href="context-behavior.html">
+<link rel="import" href="resize-behavior.html">
+<link rel="import" href="legend-behavior.html">
 
 <!--
 A line chart is a way of plotting data points on a line.
@@ -9,116 +12,84 @@ Often, it is used to show trend data, and the comparison of two data sets.
 
 ##### Example
 
-    <chart-line width="400" height="200"
-                labels="['Monday','Tuesday','Wednesday','thursday','Friday','Saturday','Sunday']"
-                values='[{"seriesLabel":"The week that was", "data":[10,14,20,25,13,9,40]}]'
-                colors="['253,180,92','247,70,74','70,191,189','148,159,177','77,83,96']">
-    </chart-line>
+    <chart-line data="[[data]]"></chart-line>
 
+    ...
+
+    this.data = {
+      labels: ["January", "February", "March", "April", "May", "June", "July"],
+      datasets: [
+      {
+        label: "My First dataset",
+        fillColor: "rgba(220,220,220,0.2)",
+        strokeColor: "rgba(220,220,220,1)",
+        pointColor: "rgba(220,220,220,1)",
+        pointStrokeColor: "#fff",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(220,220,220,1)",
+        data: [65, 59, 80, 81, 56, 55, 40]
+      },
+      {
+        label: "My Second dataset",
+        fillColor: "rgba(151,187,205,0.2)",
+        strokeColor: "rgba(151,187,205,1)",
+        pointColor: "rgba(151,187,205,1)",
+        pointStrokeColor: "#fff",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(151,187,205,1)",
+        data: [28, 48, 40, 19, 86, 27, 90]
+      }
+    ]
+  };
+
+@group Chart Elements
 @element chart-line
-@blurb A line chart is a way of plotting data points on a line.
-@status alpha
-@homepage http://robdodson.github.io/chart-elements
+@demo demo/chart-line.html
 -->
 
+<link rel="import" href="chart-styles.html">
 <dom-module id="chart-line">
+
   <template>
+
+    <style include="chart-styles"></style>
+
     <canvas id="canvas"></canvas>
-    <div id="legend" class="layout vertical center"></div>
+
+    <div id="legend"></div>
+
   </template>
+
   <script>
     Polymer({
+
       is: 'chart-line',
-      properties: {
-        colors: {
-          type: Array,
-          value: function () {
-            return [
-              '253,180,92',
-              '247,70,74',
-              '70,191,189',
-              '148,159,177',
-              '77,83,96'
-            ];
-          }
-        },
-        width: Number,
-        height: Number,
-        labels: {
-          type: Array,
-          value: function () {
-            return ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"];
-          }
-        },
-        options: {
-          type: Object,
-          value: function () {
-            return {};
-          }
-        },
-        values: {
-          type: Array,
-          value: function () {
-            return [
-              {"seriesLabel":"2014", "data":[65,59,90,81,56,55,40]},
-              {"seriesLabel":"2015", "data":[28,48,40,19,96,27,100]}
-            ];
-          }
-        },
-        legend: {
-          type: Boolean,
-          value: false
-        }
-      },
-      observers: [
-        'updateChart(values, labels, colors, options)',
-        'resize(width, height)'
+
+      behaviors: [
+        ChartBehaviors.DatasetPropertiesBehavior,
+        ChartBehaviors.ContextBehavior,
+        ChartBehaviors.ResizeBehavior,
+        ChartBehaviors.LegendBehavior
       ],
-      attached: function() {
-        this.resize();
-      },
-      resize: function () {
-        if (this.chart) {
-          this.updateChart();
-        }
-      },
+
       updateChart: function () {
         this.async(function () {
+
           if (this.chart) {
             this.chart.destroy();
-            // Bindings don't seem to be taking effect properly so
-            // manually set width and height
-            this.$.canvas.setAttribute('width', this.width);
-            this.$.canvas.setAttribute('height', this.height);
           }
-          this.datasets = this.values.map(function (val, i) {
-            return {
-              fillColor: 'rgba(' + this.colors[i] + ',0.5)',
-              strokeColor: 'rgba(' + this.colors[i] + ',1)',
-              pointColor: 'rgba(' + this.colors[i] + ',1)',
-              pointStrokeColor: '#fff',
-              data: this.values[i].data
-            };
-          }, this);
 
-          this.data = { labels: this.labels, datasets: this.datasets };
-          this.ctx = this.$.canvas.getContext('2d');
-          this.chart = new Chart(this.ctx).Line(this.data, this.options);
+          this.async(function() {
+            this.chart = new Chart(this.ctx).Line(this.data, this.options);
+
+            if (this.legend) {
+              this.$.legend.innerHTML = this.generateLegend();
+            }
+          }, null, 0);
+
         }, null, 0);
-        if (this.legend) {
-          this.generateLegend();
-        }
-      },
-      generateLegend: function() {
-        var legendHTML = "<div class=\"layout horizontal center\">";
-        for (var i = 0; i < this.values.length; i++) {
-          legendHTML += "<div style=\"background-color: rgba(" + this.colors[i]
-            + ", 1); height: 20px; width: 20px; float: left; margin: 5px;\"></div><p>"
-            + this.values[i].seriesLabel + "</p>";
-        }
-        legendHTML += "</div>";
-        this.$.legend.innerHTML = legendHTML;
       }
+
     });
   </script>
 </dom-module>

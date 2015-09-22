@@ -1,8 +1,2 @@
-node_modules
-dist
-.sass-cache
-.tmp
 .DS_Store
-.bowerrc
-bower_components/
-.idea/
+bower_components
