@@ -1,34 +1,101 @@
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
+<dom-module id="chart-legend">
+<template>
+  <style>
+    .box {
+      height: 20px;
+      width: 20px;
+      float: left;
+      margin: 5px;
+    }
+    .label {
+
+    }
+
+    .legend-item {
+      @apply(--layout-horizontal);
+      @apply(--layout-center);
+    }
+
+    .container {
+      @apply(--layout-horizontal);
+      @apply(--layout-center);
+    }
+
+  </style>
+
+
+  <div class="container">
+    <template is="dom-repeat" items="{{legendData.datasets}}">
+      <div class="legend-item">
+        <div class="box">{{setColor(item.pointColor, index)}}</div>
+        <p class="label">{{item.label}}</p>
+      </div>
+    </template>
+  </div>
+
+</template>
+</dom-module>
 <script>
-  var ChartBehaviors = ChartBehaviors || {};
-  /** @polymerBehavior */
-  ChartBehaviors.LegendBehavior = {
+  Polymer({
+
+    is: 'chart-legend',
+
+    behaviors: [
+      ChartBehaviors.DatasetPropertiesBehavior
+    ],
 
     properties: {
 
       legend: {
         type: Boolean,
         value: false
+      },
+
+      legendData: {
+        type: Array,
+        value: function() {
+          return [];
+        }
+      },
+
+      legendBoxColors: {
+        type: Array,
+        value: function() {
+          return [];
+        }
       }
 
     },
 
+    updateLegend: function(data) {
+      this.lengedBoxData = [];
+      this.legendData = data;
+      this.async(function() {
+        this.addColorToBoxes();
+      }, null, 0)
+    },
 
-    //TODO add custom styling injection for datasets box, as well as the label.
-    //fixme work out why layout is not being applied.
-    generateLegend: function() {
-      var legendHTML = "<div class=\"layout horizontal center\">";
-      for (var i = 0; i < this.data.datasets.length; i++) {
-        legendHTML += "<div class=\"layout horizontal\">"
-          + "<div style=\"background-color: " + this.data.datasets[i].pointColor +";"
-          + "height: 20px; width: 20px; float: left; margin: 5px;\"></div>"
-          + "<p>" + this.data.datasets[i].label + "</p>"
-          + "</div>";
+    addColorToBoxes: function() {
+      // Apply color to each box.
+      // Assumes the list of colors are in the order of the boxes returned.
+      var boxes = Polymer.dom(this.root).querySelectorAll('.box');
+      for (var i = 0; i < boxes.length; i++) {
+        boxes[i].style.background = this.legendBoxColors[i];
       }
-      legendHTML += "</div>";
-      return legendHTML;
+    },
+
+    setColor: function(color, index) {
+      // Add color for each box generated to a list, for it to be applied after dom nodes have generated.
+      this.legendBoxColors.push(color);
     }
 
-  };
+
+    //TODO add custom styling injection for datasets box, as well as the label.
+    //TODO apply layout to container with legend and chart
+    //TODO add layout module (behaviour)
+    //TODO seperate legend behaviour and implementation
+    //TODO Documentation
+  });
 
 </script>

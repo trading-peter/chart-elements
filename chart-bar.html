@@ -53,10 +53,18 @@ It is sometimes used to show trend data, and the comparison of multiple data set
   <template>
 
     <style include="chart-styles"></style>
+    <style>
+      .container{
+        @apply(--layout-vertical);
+        @apply(--layout-center);
+      }
+    </style>
 
-    <canvas id="canvas"></canvas>
+    <div class="container">
+      <canvas id="canvas"></canvas>
+      <chart-legend id="legend"></chart-legend>
+    </div>
 
-    <div id="legend"></div>
   </template>
 
   <script>
@@ -82,9 +90,9 @@ It is sometimes used to show trend data, and the comparison of multiple data set
           this.async(function() {
             this.chart = new Chart(this.ctx).Bar(this.data, this.options);
 
-            if (this.legend) {
-              this.$.legend.innerHTML = this.generateLegend();
-            }
+//            if (this.legend) {
+              this.$.legend.updateLegend(this.data);
+//            }
           }, null, 0);
 
         }, null, 0);
