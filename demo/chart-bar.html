@@ -17,14 +17,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="import" href="../chart-elements.html">
     <link rel="stylesheet" href="demo.css">
+    <link rel="import" href="../../iron-flex-layout/classes/iron-flex-layout.html">
   </head>
 
   <body unresolved>
 
     <template is="dom-bind">
 
-      <chart-bar id="chart" class="rectangular-chart" data="[[data]]" legend></chart-bar>
-
+      <div>
+      <chart-bar id="chart" class="rectangular-chart" data="[[data]]" legend legend-options="[[legendOptions]]"></chart-bar>
+      <span class="flex"></span>
       <div class="controls">
 
         <div class="control-group">
@@ -69,6 +71,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <input id="newData" type="text" value="15, 22, 45, 39, 77, 88, 30">
           </label>
 
+          <label>
+            legend layout
+            <input id="legendLayout" type="text" value="bottom">
+          </label>
+
           <button type="button" name="button" on-tap="addData">Add data</button>
 
         </div>
@@ -90,6 +97,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </div>
 
       </div>
+        </div>
 
     </template>
 
@@ -122,6 +130,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         ]
       };
 
+      scope.legendOptions = {
+        layout: "bottom",
+        labelStyle: [
+          {
+            "property": "color",
+            "value": "red"
+          }
+        ]
+      };
+
       scope.addData = function() {
         this.push('data.datasets', {
           label: this.$.newLabel.value,
@@ -133,6 +151,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           pointHighlightStroke: this.$.newPointHighlightStroke.value,
           data: this.$.newData.value.split(',')
         });
+        scope.legendOptions.layout = this.$.legendLayout.value;
       };
 
       scope.resize = function() {
