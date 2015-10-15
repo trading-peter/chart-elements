@@ -7,22 +7,10 @@
 
       legend: {
         type: Boolean,
-        value: true
-      },
-
-      legendOptions: {
-        type: Object,
-        value: function () {
-          return {};
-        }
+        value: false
       }
 
-    },
-
-    observers: [
-      'updateLegendStyle(legendOptions.labelStyle, legendOptions.boxStyle)',
-      'updateLegendChartLayout(legendOptions.layout)'
-    ]
+    }
 
   };
 

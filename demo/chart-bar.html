@@ -25,7 +25,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <template is="dom-bind">
 
       <div>
-      <chart-bar id="chart" class="rectangular-chart" data="[[data]]" legend legend-options="[[legendOptions]]"></chart-bar>
+      <chart-bar id="chart" class="rectangular-chart" data="[[data]]" legend legend-style="[[legendStyle]]"></chart-bar>
       <span class="flex"></span>
       <div class="controls">
 
@@ -69,11 +69,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <label>
             Data
             <input id="newData" type="text" value="15, 22, 45, 39, 77, 88, 30">
-          </label>
-
-          <label>
-            legend layout
-            <input id="legendLayout" type="text" value="bottom">
           </label>
 
           <button type="button" name="button" on-tap="addData">Add data</button>
@@ -130,12 +125,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         ]
       };
 
-      scope.legendOptions = {
-        layout: "bottom",
+      scope.legendStyle = {
         labelStyle: [
           {
             "property": "color",
-            "value": "red"
+            "value": "blue"
           }
         ]
       };
@@ -151,7 +145,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           pointHighlightStroke: this.$.newPointHighlightStroke.value,
           data: this.$.newData.value.split(',')
         });
-        scope.legendOptions.layout = this.$.legendLayout.value;
       };
 
       scope.resize = function() {

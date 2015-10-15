@@ -4,6 +4,8 @@
 <link rel="import" href="context-behavior.html">
 <link rel="import" href="resize-behavior.html">
 <link rel="import" href="chart-legend.html">
+<link rel="import" href="legend-behavior.html">
+<link rel="import" href="legend-chart-layout-behavior.html">
 
 
 <!--
@@ -55,30 +57,17 @@ It is sometimes used to show trend data, and the comparison of multiple data set
 -->
 
 <link rel="import" href="chart-styles.html">
+<link rel="import" href="legend-chart-layout-styles.html">
 <dom-module id="chart-bar">
 
   <template>
 
     <style include="chart-styles"></style>
-    <style>
-
-      .container {
-        @apply(--layout-center);
-      }
-
-      .top, .bottom {
-        @apply(--layout-vertical);
-      }
-
-      .right, .left {
-        @apply(--layout-horizontal);
-      }
-
-    </style>
+    <style include="legend-chart-layout-styles"></style>
 
     <div id="chart" class="container">
       <canvas id="canvas"></canvas>
-      <chart-legend id="legend"></chart-legend>
+      <chart-legend id="legend" legend-data="[[data.datasets]]" legend-layout="[[legendLayout]]" legend-style="[[legendStyle]]"></chart-legend>
     </div>
 
   </template>
@@ -92,7 +81,8 @@ It is sometimes used to show trend data, and the comparison of multiple data set
         ChartBehaviors.DatasetPropertiesBehavior,
         ChartBehaviors.ContextBehavior,
         ChartBehaviors.ResizeBehavior,
-        ChartBehaviors.LegendBehavior
+        ChartBehaviors.LegendBehavior,
+        ChartBehaviors.LegendChartLayoutBehavior
       ],
 
       updateChart: function () {
@@ -106,58 +96,13 @@ It is sometimes used to show trend data, and the comparison of multiple data set
           this.async(function() {
             this.chart = new Chart(this.ctx).Bar(this.data, this.options);
 
-            if (this.legend) {
-              this.$.legend.updateLegend(this.data, this.legendOptions);
+            if (!this.legend) {
+              this.$.legend.style.display = 'none';
             }
           }, null, 0);
 
         }, null, 0);
 
-      },
-
-      updateLegendChartLayout: function() {
-        this.async(function() {
-          this.$.chart.classList.remove("top");
-          this.$.chart.classList.remove("right");
-          this.$.chart.classList.remove("bottom");
-          this.$.chart.classList.remove("left");
-
-          var legend = this.$.legend;
-          var chart = this.$.chart;
-          var firstChild = chart.firstChild;
-          var canvas = this.$.canvas;
-          this.$.chart.removeChild(legend);
-
-          switch (this.legendOptions.layout) {
-            case "top":
-              chart.insertBefore(legend, firstChild);
-              this.$.chart.classList.add("top");
-              break;
-            case "right":
-              canvas.parentNode.insertBefore(legend, canvas.nextSibling);
-              this.$.chart.classList.add("right");
-              break;
-            case "bottom":
-              canvas.parentNode.insertBefore(legend, canvas.nextSibling);
-              this.$.chart.classList.add("bottom");
-              break;
-            case "left":
-              chart.insertBefore(legend, firstChild);
-              this.$.chart.classList.add("left");
-              break;
-            default:
-              canvas.parentNode.insertBefore(legend, canvas.nextSibling);
-              this.$.chart.classList.add("bottom");
-              break;
-          }
-          this.$.legend.updateLegendLayout(this.legendOptions);
-        }, null, 0);
-      },
-
-      updateLegendStyle: function() {
-        this.async(function() {
-          this.$.legend.updateLegendStyle(this.legendOptions);
-        }, null, 0);
       }
 
     });

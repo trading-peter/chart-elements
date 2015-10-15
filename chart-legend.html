@@ -1,8 +1,14 @@
-<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
-<link rel="import" href="legend-behavior.html">
+<link rel="import" href="legend-layout-behavior.html">
+<link rel="import" href="legend-style-behavior.html">
+<link rel="import" href="legend-layout-styles.html">
+
 <dom-module id="chart-legend">
 <template>
+
+  <style include="legend-layout-styles"></style>
+
   <style>
+
     .box {
       height: 20px;
       width: 20px;
@@ -15,23 +21,10 @@
       @apply(--layout-center);
     }
 
-    .container {
-      @apply(--layout-center);
-    }
-
-    .top, .bottom {
-      @apply(--layout-horizontal);
-    }
-
-    .left, .right {
-      @apply(--layout-vertical);
-    }
-
   </style>
 
-
-  <div id="container" class="container">
-    <template is="dom-repeat" items="{{legendData.datasets}}">
+  <div id="legendContainer" class="container">
+    <template is="dom-repeat" items="{{legendData}}">
       <div class="legend-item">
         <div class="box">{{setColor(item.pointColor, index)}}</div>
         <p class="label">{{item.label}}</p>
@@ -42,12 +35,14 @@
 </template>
 </dom-module>
 <script>
+
   Polymer({
 
     is: 'chart-legend',
 
     behaviors: [
-      ChartBehaviors.DatasetPropertiesBehavior
+      ChartBehaviors.LegendLayoutBehavior,
+      ChartBehaviors.LegendStyleBehavior
     ],
 
     properties: {
@@ -68,13 +63,15 @@
 
     },
 
-    updateLegend: function(data, legendOptions) {
-      console.log("update legend");
-      this.lengedBoxData = [];
-      this.legendData = data;
+    observers: [
+      'updateLegend(legendData.splices)'
+    ],
+
+    updateLegend: function() {
+      console.log('ping');
       this.async(function() {
         this.addColorToBoxes();
-        this.updateLegendStyle(legendOptions)
+        this.updateLegendStyle();
       }, null, 0)
     },
 
@@ -90,54 +87,8 @@
     setColor: function(color, index) {
       // Add color for each box generated to a list, for it to be applied after dom nodes have generated.
       this.legendBoxColors.push(color);
-    },
-
-    updateLegendStyle: function(legendOptions) {
-      if (legendOptions.labelStyle) {
-        var labels = Polymer.dom(this.root).querySelectorAll('.label');
-        for (var i = 0; i < labels.length; i++) {
-          for (var l = 0; l < legendOptions.labelStyle.length; l++) {
-            labels[i].style[legendOptions.labelStyle[l].property] = legendOptions.labelStyle[l].value;
-          }
-        }
-      }
-      if (legendOptions.boxStyle) {
-        var boxes = Polymer.dom(this.root).querySelectorAll('.box');
-        for (var j = 0; j < boxes.length; j++) {
-          for (var m = 0; m < legendOptions.boxStyle.length; m++) {
-            labels[j].style[legendOptions.boxStyle[m].property] = legendOptions.boxStyle[m].value;
-          }
-        }
-      }
-    },
-
-    updateLegendLayout: function(legendOptions) {
-      var layout = legendOptions.layout;
-      this.$.container.classList.remove("top");
-      this.$.container.classList.remove("right");
-      this.$.container.classList.remove("bottom");
-      this.$.container.classList.remove("left");
-      switch (layout) {
-        case "top":
-          this.$.container.classList.add("top");
-          break;
-        case "right":
-          this.$.container.classList.add("right");
-          break;
-        case "bottom":
-          this.$.container.classList.add("bottom");
-          break;
-        case "left":
-          this.$.container.classList.add("left");
-          break;
-        default:
-          this.$.container.classList.add("bottom");
-          break;
-      }
     }
 
-    //TODO update demo
-    //TODO Documentation
   });
 
 </script>

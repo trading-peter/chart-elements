@@ -3,7 +3,9 @@
 <link rel="import" href="dataset-properties-behavior.html">
 <link rel="import" href="context-behavior.html">
 <link rel="import" href="resize-behavior.html">
+<link rel="import" href="chart-legend.html">
 <link rel="import" href="legend-behavior.html">
+<link rel="import" href="legend-chart-layout-behavior.html">
 
 
 <!--
@@ -49,15 +51,18 @@ They are often useful for comparing the points of two or more different data set
 -->
 
 <link rel="import" href="chart-styles.html">
+<link rel="import" href="legend-chart-layout-styles.html">
 <dom-module id="chart-radar">
 
   <template>
 
     <style include="chart-styles"></style>
+    <style include="legend-chart-layout-styles"></style>
 
-    <canvas id="canvas"></canvas>
-
-    <div id="legend"></div>
+    <div id="chart" class="container">
+      <canvas id="canvas"></canvas>
+      <chart-legend id="legend" legend-data="[[data.datasets]]" legend-layout="[[legendLayout]]" legend-style="[[legendStyle]]"></chart-legend>
+    </div>
 
   </template>
 
@@ -70,7 +75,8 @@ They are often useful for comparing the points of two or more different data set
         ChartBehaviors.DatasetPropertiesBehavior,
         ChartBehaviors.ContextBehavior,
         ChartBehaviors.ResizeBehavior,
-        ChartBehaviors.LegendBehavior
+        ChartBehaviors.LegendBehavior,
+        ChartBehaviors.LegendChartLayoutBehavior
       ],
 
       updateChart: function () {
@@ -84,8 +90,8 @@ They are often useful for comparing the points of two or more different data set
           this.async(function() {
             this.chart = new Chart(this.ctx).Radar(this.data, this.options);
 
-            if (this.legend) {
-              this.$.legend.innerHTML = this.generateLegend();
+            if (!this.legend) {
+              this.$.legend.style.display = 'none';
             }
           }, null, 0);
 

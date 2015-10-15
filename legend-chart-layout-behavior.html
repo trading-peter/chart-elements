@@ -1,0 +1,60 @@
+<script>
+  var ChartBehaviors = ChartBehaviors || {};
+  /** @polymerBehavior */
+  ChartBehaviors.LegendChartLayoutBehavior = {
+
+    properties: {
+
+      legendLayout: {
+        type: String,
+        value: function() {
+          return '';
+        }
+      }
+
+    },
+
+    observers: [
+      'updateLegendChartLayout(legendLayout)'
+    ],
+
+    updateLegendChartLayout: function() {
+      this.async(function() {
+        var legend = this.$.legend,
+          chart = this.$.chart,
+          firstChild = chart.firstChild,
+          canvas = this.$.canvas;
+
+        chart.removeChild(legend);
+        chart.classList.remove("top");
+        chart.classList.remove("right");
+        chart.classList.remove("bottom");
+        chart.classList.remove("left");
+
+        switch (this.legendLayout) {
+          case "top":
+            chart.insertBefore(legend, firstChild);
+            chart.classList.add("top");
+            break;
+          case "right":
+            canvas.parentNode.insertBefore(legend, canvas.nextSibling);
+            chart.classList.add("right");
+            break;
+          case "bottom":
+            canvas.parentNode.insertBefore(legend, canvas.nextSibling);
+            chart.classList.add("bottom");
+            break;
+          case "left":
+            chart.insertBefore(legend, firstChild);
+            chart.classList.add("left");
+            break;
+          default:
+            canvas.parentNode.insertBefore(legend, canvas.nextSibling);
+            chart.classList.add("bottom");
+            break;
+        }
+      }, null, 0);
+    }
+  };
+
+</script>
