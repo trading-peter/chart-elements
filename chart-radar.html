@@ -15,7 +15,7 @@ They are often useful for comparing the points of two or more different data set
 
 ##### Example
 
-    <chart-radar data="[[data]]"></chart-radar>
+    <chart-radar data="[[data]]" legend legend-style="[[legendStyle]]" legend-layout="[[legendLayout]]"></chart-radar>
 
     ...
 
@@ -44,6 +44,22 @@ They are often useful for comparing the points of two or more different data set
         }
       ]
     };
+
+  this.legendLayout = "bottom"
+  this.legendStyle = {
+      labelStyle: [
+      {
+        "property": "color",
+        "value": "blue"
+      }
+    ]
+    boxStyle: [
+      {
+        property: "borderRadius",
+        value: "5px"
+      }
+    ]
+  }
 
 @group Chart Elements
 @element chart-radar

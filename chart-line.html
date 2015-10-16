@@ -14,7 +14,7 @@ Often, it is used to show trend data, and the comparison of two data sets.
 
 ##### Example
 
-    <chart-line data="[[data]]"></chart-line>
+    <chart-line data="[[data]]" legend legend-style="[[legendStyle]]" legend-layout="[[legendLayout]]"></chart-line>
 
     ...
 
@@ -43,6 +43,22 @@ Often, it is used to show trend data, and the comparison of two data sets.
       }
     ]
   };
+
+  this.legendLayout = "left"
+  this.legendStyle = {
+      labelStyle: [
+      {
+        "property": "color",
+        "value": "red"
+      }
+    ]
+    boxStyle: [
+      {
+        property: "borderRadius",
+        value: "5px"
+      }
+    ]
+  }
 
 @group Chart Elements
 @element chart-line
@@ -79,6 +95,7 @@ Often, it is used to show trend data, and the comparison of two data sets.
       ],
 
       updateChart: function () {
+
         this.async(function () {
 
           if (this.chart) {
@@ -94,6 +111,7 @@ Often, it is used to show trend data, and the comparison of two data sets.
           }, null, 0);
 
         }, null, 0);
+
       }
 
     });

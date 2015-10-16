@@ -15,7 +15,7 @@ It is sometimes used to show trend data, and the comparison of multiple data set
 
 ##### Example
 
-    <chart-bar data="[[data]]" legend legend-options="[[legendOptions]]"></chart-bar>
+    <chart-bar data="[[data]]" legend legend-style="[[legendStyle]]" legend-layout="[[legendLayout]]"></chart-bar>
 
     ...
 
@@ -45,11 +45,21 @@ It is sometimes used to show trend data, and the comparison of multiple data set
     ]
   };
 
-  this.legendOptions = {
-    layout: "top"  || "right || "bottom" || "left",
-    labelStyle: "",
-    boxStyle: ""
-  };
+  this.legendLayout = "top"
+  this.legendStyle = {
+      labelStyle: [
+      {
+        "property": "color",
+        "value": "black"
+      }
+    ]
+    boxStyle: [
+      {
+        property: "borderRadius",
+        value: "5px"
+      }
+    ]
+  }
 
 @group Chart Elements
 @element chart-bar
