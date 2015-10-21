@@ -25,7 +25,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <template is="dom-bind">
 
       <div>
-      <chart-bar id="chart" class="rectangular-chart" data="[[data]]" legend legend-style="[[legendStyle]]"></chart-bar>
+      <chart-bar id="chart" class="rectangular-chart" data="[[data]]" legend legend-style="[[legendStyle]]" legend-layout="[[legendLayout]]"></chart-bar>
       <span class="flex"></span>
       <div class="controls">
 
@@ -124,6 +124,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           }
         ]
       };
+
+      scope.legendLayout = "top";
 
       scope.legendStyle = {
         labelStyle: [
