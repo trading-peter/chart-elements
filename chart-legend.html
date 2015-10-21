@@ -20,13 +20,12 @@
       @apply(--layout-horizontal);
       @apply(--layout-center);
     }
-
   </style>
 
   <div id="legendContainer" class="container">
     <template is="dom-repeat" items="{{legendData}}">
       <div class="legend-item">
-        <div class="box">{{setColor(item.pointColor, index)}}</div>
+        <div class="box">{{setColor(item, index)}}</div>
         <p class="label">{{item.label}}</p>
       </div>
     </template>
@@ -83,7 +82,8 @@
       }
     },
 
-    setColor: function(color, index) {
+    setColor: function(item, index) {
+      var color = item.pointColor || item.color
       // Add color for each box generated to a list, for it to be applied after dom nodes have generated.
       this.legendBoxColors.push(color);
     }
