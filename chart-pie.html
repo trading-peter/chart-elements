@@ -3,6 +3,10 @@
 <link rel="import" href="data-properties-behavior.html">
 <link rel="import" href="context-behavior.html">
 <link rel="import" href="resize-behavior.html">
+<link rel="import" href="chart-legend.html">
+<link rel="import" href="legend-behavior.html">
+<link rel="import" href="legend-chart-layout-behavior.html">
+
 
 <!--
 Pie and doughnut charts are probably the most commonly used chart there are. They are divided into segments, the arc of each segment shows a the proportional value of each piece of data.
@@ -46,13 +50,18 @@ They are also registered under two aliases in the Chart core. Other than their d
 -->
 
 <link rel="import" href="chart-styles.html">
+<link rel="import" href="legend-chart-layout-styles.html">
 <dom-module id="chart-pie">
 
   <template>
 
     <style include="chart-styles"></style>
+    <style include="legend-chart-layout-styles"></style>
 
-    <canvas id="canvas"></canvas>
+    <div id="chart" class="container">
+      <canvas id="canvas"></canvas>
+      <chart-legend id="legend" legend-data="[[data]]" legend-layout="[[legendLayout]]" legend-style="[[legendStyle]]"></chart-legend>
+    </div>
 
   </template>
 
@@ -64,7 +73,9 @@ They are also registered under two aliases in the Chart core. Other than their d
       behaviors: [
         ChartBehaviors.DataPropertiesBehavior,
         ChartBehaviors.ContextBehavior,
-        ChartBehaviors.ResizeBehavior
+        ChartBehaviors.ResizeBehavior,
+        ChartBehaviors.LegendBehavior,
+        ChartBehaviors.LegendChartLayoutBehavior
       ],
 
       updateChart: function () {
@@ -77,6 +88,9 @@ They are also registered under two aliases in the Chart core. Other than their d
 
           this.async(function() {
             this.chart = new Chart(this.ctx).Pie(this.data, this.options);
+            if (!this.legend) {
+              this.$.legend.style.display = 'none';
+            }
           }, null, 0);
 
         }, null, 0);
