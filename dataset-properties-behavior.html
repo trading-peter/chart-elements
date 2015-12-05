@@ -24,8 +24,20 @@
     },
 
     observers: [
-      'updateChart(data.*, options.*)'
-    ]
+      '_configurationChanged(data.*, options.*)'
+    ],
+
+    _configurationChanged: function(dataRecord, optionsRecord) {
+      if (dataRecord.base.labels && dataRecord.base.datasets) {
+        this.isUpdateable = true;
+      } else {
+        this.isUpdateable = false;
+      }
+
+      if (this.isUpdateable && this.isAttached) {
+        this.updateChart();
+      }
+    }
 
   };
 

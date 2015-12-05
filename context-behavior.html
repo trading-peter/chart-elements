@@ -5,6 +5,9 @@
 
     attached: function() {
       this.ctx = this.$.canvas.getContext('2d');
+      if (this.isUpdateable) {
+        this.updateChart();        
+      }
     }
 
   };
