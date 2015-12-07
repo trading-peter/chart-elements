@@ -1,10 +1,6 @@
 {
   "plugins": {
-    "local": {
-      "browsers": ["chrome", "firefox"]
-    },
     "sauce": {
-      "disabled": true,
       "browsers": [{
           "browserName": "microsoftedge",
           "platform": "Windows 10",
@@ -13,10 +9,6 @@
           "browserName": "internet explorer",
           "platform": "Windows 8.1",
           "version": "11"
-        }, {
-          "browserName": "internet explorer",
-          "platform": "Windows 7",
-          "version": "10"
         },
 
         {
@@ -27,18 +19,6 @@
           "browserName": "safari",
           "platform": "OS X 10.10",
           "version": "8"
-        },
-
-        {
-          "browserName": "chrome",
-          "platform": "Linux",
-          "version": ""
-        },
-
-        {
-          "browserName": "firefox",
-          "platform": "Linux",
-          "version": ""
         }
       ]
     }
