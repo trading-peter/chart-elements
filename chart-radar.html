@@ -1,4 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-resizable-behavior/iron-resizable-behavior.html">
 <link rel="import" href="chart-js-import.html">
 <link rel="import" href="dataset-properties-behavior.html">
 <link rel="import" href="context-behavior.html">
@@ -64,6 +65,7 @@ They are often useful for comparing the points of two or more different data set
       is: 'chart-radar',
 
       behaviors: [
+        Polymer.IronResizableBehavior,
         ChartBehaviors.DatasetPropertiesBehavior,
         ChartBehaviors.ContextBehavior,
         ChartBehaviors.ResizeBehavior

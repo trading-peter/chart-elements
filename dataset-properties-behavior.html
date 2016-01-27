@@ -29,13 +29,13 @@
 
     _configurationChanged: function(dataRecord, optionsRecord) {
       if (dataRecord.base.labels && dataRecord.base.datasets) {
-        this.isUpdateable = true;
+        this.hasData = true;
       } else {
-        this.isUpdateable = false;
+        this.hasData = false;
       }
 
-      if (this.isUpdateable && this.isAttached) {
-        this.updateChart();
+      if (this.hasData && this.isAttached) {
+        this._queue();
       }
     }
 

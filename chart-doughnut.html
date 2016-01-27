@@ -1,4 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-resizable-behavior/iron-resizable-behavior.html">
 <link rel="import" href="chart-js-import.html">
 <link rel="import" href="data-properties-behavior.html">
 <link rel="import" href="context-behavior.html">
@@ -62,6 +63,7 @@ They are also registered under two aliases in the Chart core. Other than their d
       is: 'chart-doughnut',
 
       behaviors: [
+        Polymer.IronResizableBehavior,
         ChartBehaviors.DataPropertiesBehavior,
         ChartBehaviors.ContextBehavior,
         ChartBehaviors.ResizeBehavior

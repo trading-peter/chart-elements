@@ -1,4 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-resizable-behavior/iron-resizable-behavior.html">
 <link rel="import" href="chart-js-import.html">
 <link rel="import" href="data-properties-behavior.html">
 <link rel="import" href="context-behavior.html">
@@ -70,6 +71,7 @@ This type of chart is often useful when we want to show a comparison data simila
       is: 'chart-polar-area',
 
       behaviors: [
+        Polymer.IronResizableBehavior,
         ChartBehaviors.DataPropertiesBehavior,
         ChartBehaviors.ContextBehavior,
         ChartBehaviors.ResizeBehavior
