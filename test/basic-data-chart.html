@@ -1,0 +1,72 @@
+<!doctype html>
+
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../../web-component-tester/browser.js"></script>
+
+  <!-- Step 1: import the element to test -->
+  <link rel="import" href="../chart-pie.html">
+</head>
+
+<body>
+
+  <!-- You can use the document as a place to set up your fixtures. -->
+  <test-fixture id="basic-pie-chart">
+    <template>
+      <chart-pie></chart-pie>
+    </template>
+  </test-fixture>
+
+  <script>
+    suite('basic data chart', function() {
+      var chartEl;
+      var chart;
+      var data = [
+        {
+          value: 300,
+          color:"#F7464A",
+          highlight: "#FF5A5E",
+          label: "Red"
+        },
+        {
+          value: 50,
+          color: "#46BFBD",
+          highlight: "#5AD3D1",
+          label: "Green"
+        },
+        {
+          value: 100,
+          color: "#FDB45C",
+          highlight: "#FFC870",
+          label: "Yellow"
+        }
+      ];
+
+      suite('when setting data property', function() {
+
+        setup(function() {
+          chartEl = fixture('basic-pie-chart');
+        });
+
+        test('will render', function(done) {
+          expect(chartEl.chart).to.be.undefined;
+          chartEl.data = data;
+          setTimeout(function() {
+            expect(chartEl.chart).to.not.be.undefined;
+            expect(chartEl.chart.outerRadius).to.be.above(0);
+            done();
+          }, 1);
+        });
+      });
+
+    });
+  </script>
+
+</body>
+
+</html>

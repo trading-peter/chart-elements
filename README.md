@@ -1,4 +1,4 @@
-chart-elements
+chart-elements [![Build Status](https://travis-ci.org/robdodson/chart-elements.svg?branch=master)](https://travis-ci.org/robdodson/chart-elements)
 ================
 
 See the [component page](http://robdodson.github.io/chart-elements) for more information.

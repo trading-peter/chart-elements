@@ -3,8 +3,30 @@
   /** @polymerBehavior */
   ChartBehaviors.ContextBehavior = {
 
+    _measure: function(cb) {
+      function measure() {
+        if (this.offsetHeight) {
+          cb(true);
+        } else {
+          cb(false);
+        }
+      }
+      requestAnimationFrame(measure.bind(this));
+    },
+
+    _queue: function() {
+      if (this.hasData) {
+        this._measure(function(hasHeight) {
+          if (hasHeight) {
+            this.updateChart();
+          }
+        }.bind(this));
+      }
+    },
+
     attached: function() {
       this.ctx = this.$.canvas.getContext('2d');
+      this._queue();
     }
 
   };
