@@ -17,14 +17,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="import" href="../chart-elements.html">
     <link rel="stylesheet" href="demo.css">
+    <link rel="import" href="../../iron-flex-layout/classes/iron-flex-layout.html">
   </head>
 
   <body unresolved>
 
     <template is="dom-bind">
 
-      <chart-bar id="chart" class="rectangular-chart" data="[[data]]"></chart-bar>
-
+      <div>
+      <chart-bar id="chart" class="rectangular-chart" data="[[data]]" legend legend-style="[[legendStyle]]" legend-layout="[[legendLayout]]"></chart-bar>
+      <span class="flex"></span>
       <div class="controls">
 
         <div class="control-group">
@@ -90,6 +92,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </div>
 
       </div>
+        </div>
 
     </template>
 
@@ -118,6 +121,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             pointHighlightFill: "#fff",
             pointHighlightStroke: "rgba(151,187,205,1)",
             data: [28, 48, 40, 19, 86, 27, 90]
+          }
+        ]
+      };
+
+      scope.legendLayout = "top";
+
+      scope.legendStyle = {
+        labelStyle: [
+          {
+            "property": "color",
+            "value": "blue"
+          }
+        ],
+        boxStyle: [
+          {
+            "property": "borderRadius",
+            "value": "10px"
           }
         ]
       };

@@ -1,0 +1,93 @@
+<link rel="import" href="legend-layout-behavior.html">
+<link rel="import" href="legend-style-behavior.html">
+<link rel="import" href="legend-layout-styles.html">
+
+<dom-module id="chart-legend">
+<template>
+
+  <style include="legend-layout-styles"></style>
+
+  <style>
+
+    .box {
+      height: 20px;
+      width: 20px;
+      float: left;
+      margin: 5px;
+    }
+
+    .legend-item {
+      @apply(--layout-horizontal);
+      @apply(--layout-center);
+    }
+  </style>
+
+  <div id="legendContainer" class="container">
+    <template is="dom-repeat" items="{{legendData}}">
+      <div class="legend-item">
+        <div class="box">{{setColor(item, index)}}</div>
+        <p class="label">{{item.label}}</p>
+      </div>
+    </template>
+  </div>
+
+</template>
+</dom-module>
+<script>
+
+  Polymer({
+
+    is: 'chart-legend',
+
+    behaviors: [
+      ChartBehaviors.LegendLayoutBehavior,
+      ChartBehaviors.LegendStyleBehavior
+    ],
+
+    properties: {
+
+      legendData: {
+        type: Array,
+        value: function() {
+          return [];
+        }
+      },
+
+      legendBoxColors: {
+        type: Array,
+        value: function() {
+          return [];
+        }
+      }
+
+    },
+
+    observers: [
+      'updateLegend(legendData.splices)'
+    ],
+
+    updateLegend: function() {
+      this.async(function() {
+        this.addColorToBoxes();
+        this.updateLegendStyle();
+      }, null, 0)
+    },
+
+    addColorToBoxes: function() {
+      // Apply color to each box.
+      // Assumes the list of colors are in the order of the boxes returned.
+      var boxes = Polymer.dom(this.root).querySelectorAll('.box');
+      for (var i = 0; i < boxes.length; i++) {
+        boxes[i].style.background = this.legendBoxColors[i];
+      }
+    },
+
+    setColor: function(item, index) {
+      var color = item.pointColor || item.color
+      // Add color for each box generated to a list, for it to be applied after dom nodes have generated.
+      this.legendBoxColors.push(color);
+    }
+
+  });
+
+</script>

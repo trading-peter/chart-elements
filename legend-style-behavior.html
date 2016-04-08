@@ -1,0 +1,46 @@
+<script>
+  var ChartBehaviors = ChartBehaviors || {};
+  /** @polymerBehavior */
+  ChartBehaviors.LegendStyleBehavior = {
+
+    properties: {
+
+      legendStyle: {
+        type: Object,
+        value: function () {
+          return {};
+        }
+      }
+
+    },
+
+    observers: [
+      'updateLegendStyle(legendStyle)'
+    ],
+
+    updateLegendStyle: function() {
+      this.async(function() {
+        var styles = this.legendStyle,
+          root = this.$.legendContainer;
+        if (styles.labelStyle) {
+          var labels = Polymer.dom(root).querySelectorAll('.label');
+          for (var i = 0; i < labels.length; i++) {
+            for (var j = 0; j < styles.labelStyle.length; j++) {
+              labels[i].style[styles.labelStyle[j].property] = styles.labelStyle[j].value;
+            }
+          }
+        }
+        if (styles.boxStyle) {
+          var boxes = Polymer.dom(root).querySelectorAll('.box');
+          for (var l = 0; l < boxes.length; l++) {
+            for (var m = 0; m < styles.boxStyle.length; m++) {
+              boxes[l].style[styles.boxStyle[m].property] = styles.boxStyle[m].value;
+            }
+          }
+        }
+      });
+    }
+
+  };
+
+</script>

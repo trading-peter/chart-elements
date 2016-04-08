@@ -1,0 +1,57 @@
+<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
+<script>
+  var ChartBehaviors = ChartBehaviors || {};
+  /** @polymerBehavior */
+  ChartBehaviors.LegendLayoutBehavior = {
+
+    properties: {
+
+      legendLayout: {
+        type: String,
+        value: function() {
+          return '';
+        }
+      }
+
+    },
+
+    observers: [
+      'updateLegendLayout(legendLayout)'
+    ],
+
+    updateLegendLayout: function() {
+      this.async(function() {
+      var layout = this.legendLayout,
+          legendContainer = this.$.legendContainer;
+
+      if(legendContainer) {
+        legendContainer.classList.remove("topLegendItem");
+        legendContainer.classList.remove("rightLegendItem");
+        legendContainer.classList.remove("bottomLegendItem");
+        legendContainer.classList.remove("leftLegendItem");
+        legendContainer.classList.remove("leftRightItemAlignment");
+        legendContainer.classList.remove("topBottomItemAlignment");
+
+        switch (layout) {
+          case "top":
+            legendContainer.classList.add("topLegendItem");
+            break;
+          case "right":
+            legendContainer.classList.add("rightLegendItem");
+            break;
+          case "bottom":
+            legendContainer.classList.add("bottomLegendItem");
+            break;
+          case "left":
+            legendContainer.classList.add("leftLegendItem");
+            break;
+          default:
+            legendContainer.classList.add("bottomLegendItem");
+            break;
+        }
+      }
+      });
+    }
+  };
+
+</script>

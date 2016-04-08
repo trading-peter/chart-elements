@@ -4,6 +4,9 @@
 <link rel="import" href="dataset-properties-behavior.html">
 <link rel="import" href="context-behavior.html">
 <link rel="import" href="resize-behavior.html">
+<link rel="import" href="chart-legend.html">
+<link rel="import" href="legend-behavior.html">
+<link rel="import" href="legend-chart-layout-behavior.html">
 
 <!--
 A line chart is a way of plotting data points on a line.
@@ -12,7 +15,7 @@ Often, it is used to show trend data, and the comparison of two data sets.
 
 ##### Example
 
-    <chart-line data="[[data]]"></chart-line>
+    <chart-line data="[[data]]" legend legend-style="[[legendStyle]]" legend-layout="[[legendLayout]]"></chart-line>
 
     ...
 
@@ -42,19 +45,40 @@ Often, it is used to show trend data, and the comparison of two data sets.
     ]
   };
 
+  this.legendLayout = "left"
+  this.legendStyle = {
+      labelStyle: [
+      {
+        "property": "color",
+        "value": "red"
+      }
+    ]
+    boxStyle: [
+      {
+        property: "borderRadius",
+        value: "5px"
+      }
+    ]
+  }
+
 @group Chart Elements
 @element chart-line
 @demo demo/chart-line.html
 -->
 
 <link rel="import" href="chart-styles.html">
+<link rel="import" href="legend-chart-layout-styles.html">
 <dom-module id="chart-line">
 
   <template>
 
     <style include="chart-styles"></style>
+    <style include="legend-chart-layout-styles"></style>
 
-    <canvas id="canvas"></canvas>
+    <div id="chart" class="container">
+      <canvas id="canvas"></canvas>
+      <chart-legend id="legend" legend-data="[[data.datasets]]" legend-layout="[[legendLayout]]" legend-style="[[legendStyle]]"></chart-legend>
+    </div>
 
   </template>
 
@@ -67,7 +91,9 @@ Often, it is used to show trend data, and the comparison of two data sets.
         Polymer.IronResizableBehavior,
         ChartBehaviors.DatasetPropertiesBehavior,
         ChartBehaviors.ContextBehavior,
-        ChartBehaviors.ResizeBehavior
+        ChartBehaviors.ResizeBehavior,
+        ChartBehaviors.LegendBehavior,
+        ChartBehaviors.LegendChartLayoutBehavior
       ],
 
       updateChart: function () {
@@ -80,6 +106,10 @@ Often, it is used to show trend data, and the comparison of two data sets.
 
           this.async(function() {
             this.chart = new Chart(this.ctx).Line(this.data, this.options);
+
+            if (!this.legend) {
+              this.$.legend.style.display = 'none';
+            }
           }, null, 0);
 
         }, null, 0);
