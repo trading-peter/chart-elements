@@ -3,7 +3,7 @@
   "version": "3.0.0",
   "authors": [
     "Rob Dodson",
-	"Diogo Moura"
+    "Diogo Moura"
   ],
   "description": "A custom element implementation of the Chart.js library",
   "keywords": [
