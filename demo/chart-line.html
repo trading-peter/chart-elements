@@ -101,22 +101,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         datasets: [
           {
             label: "My First dataset",
-            fillColor: "rgba(220,220,220,0.2)",
-            strokeColor: "rgba(220,220,220,1)",
-            pointColor: "rgba(220,220,220,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(220,220,220,1)",
+            backgroundColor: "rgba(220,220,220,0.2)",
+            borderColor: "rgba(220,220,220,1)",
+            borderWidth: 1,
+            pointBackgroundColor: "rgba(220,220,220,1)",
+            pointBorderColor: "#fff",
+            pointHoverBackgroundColor: "#fff",
+            pointHoverBorderColor: "rgba(220,220,220,1)",
             data: [65, 59, 80, 81, 56, 55, 40]
           },
           {
             label: "My Second dataset",
-            fillColor: "rgba(151,187,205,0.2)",
-            strokeColor: "rgba(151,187,205,1)",
-            pointColor: "rgba(151,187,205,1)",
-            pointStrokeColor: "#fff",
+            backgroundColor: "rgba(151,187,205,0.2)",
+            borderColor: "rgba(151,187,205,1)",
+            borderWidth: 1,
+            pointBackgroundColor: "rgba(151,187,205,1)",
+            pointBorderColor: "#fff",
             pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(151,187,205,1)",
+            pointHoverBorderColor: "rgba(151,187,205,1)",
             data: [28, 48, 40, 19, 86, 27, 90]
           }
         ]
@@ -125,12 +127,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       scope.addData = function() {
         this.push('data.datasets', {
           label: this.$.newLabel.value,
-          fillColor: this.$.newFillColor.value,
-          strokeColor: this.$.newStrokeColor.value,
-          pointColor: this.$.newPointColor.value,
-          pointStrokeColor: this.$.newPointStrokeColor.value,
-          pointHighlightFill: this.$.newPointHighlightFill.value,
-          pointHighlightStroke: this.$.newPointHighlightStroke.value,
+          backgroundColor: this.$.newFillColor.value,
+          borderColor: this.$.newStrokeColor.value,
+          borderWidth: 1,
+          pointBackgroundColor: this.$.newPointColor.value,
+          pointBorderColor: this.$.newPointStrokeColor.value,
+          pointHoverBackgroundColor: this.$.newPointHighlightFill.value,
+          pointHoverBorderColor: this.$.newPointHighlightStroke.value,
           data: this.$.newData.value.split(',')
         });
       };

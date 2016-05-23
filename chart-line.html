@@ -1,7 +1,7 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-resizable-behavior/iron-resizable-behavior.html">
 <link rel="import" href="chart-js-import.html">
-<link rel="import" href="dataset-properties-behavior.html">
+<link rel="import" href="chart-property-behavior.html">
 <link rel="import" href="context-behavior.html">
 <link rel="import" href="resize-behavior.html">
 
@@ -65,25 +65,13 @@ Often, it is used to show trend data, and the comparison of two data sets.
 
       behaviors: [
         Polymer.IronResizableBehavior,
-        ChartBehaviors.DatasetPropertiesBehavior,
+        ChartBehaviors.ChartPropertyBehavior,
         ChartBehaviors.ContextBehavior,
         ChartBehaviors.ResizeBehavior
       ],
 
-      updateChart: function () {
-
-        this.async(function () {
-
-          if (this.chart) {
-            this.chart.destroy();
-          }
-
-          this.async(function() {
-            this.chart = new Chart(this.ctx).Line(this.data, this.options);
-          }, null, 0);
-
-        }, null, 0);
-
+      ready: function() {
+        this._setType('line');
       }
 
     });
