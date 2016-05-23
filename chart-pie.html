@@ -20,26 +20,27 @@ They are also registered under two aliases in the Chart core. Other than their d
 
     ...
 
-    this.data = [
-      {
-        value: 300,
-        color:"#F7464A",
-        highlight: "#FF5A5E",
-        label: "Red"
-      },
-      {
-        value: 50,
-        color: "#46BFBD",
-        highlight: "#5AD3D1",
-        label: "Green"
-      },
-      {
-        value: 100,
-        color: "#FDB45C",
-        highlight: "#FFC870",
-        label: "Yellow"
-      }
-    ];
+    this.data = {
+      labels: [
+        "Red",
+        "Green",
+        "Yellow"
+      ],
+      datasets: [
+        {
+          data: [300, 50, 100],
+          backgroundColor: [
+            "#FF6384",
+            "#36A2EB",
+            "#FFCE56"
+          ],
+          hoverBackgroundColor: [
+            "#FF6384",
+            "#36A2EB",
+            "#FFCE56"
+          ]
+        }]
+    };
 
 @group Chart Elements
 @element chart-pie
