@@ -76,34 +76,33 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <script>
       var scope = document.querySelector('template');
 
-      scope.data = [
+      scope.data = {
+		labels: [
+			"Red",
+			"Green",
+			"Yellow"
+		],
+		datasets: [
         {
-          value: 300,
-          color:"#F7464A",
-          highlight: "#FF5A5E",
-          label: "Red"
-        },
-        {
-          value: 50,
-          color: "#46BFBD",
-          highlight: "#5AD3D1",
-          label: "Green"
-        },
-        {
-          value: 100,
-          color: "#FDB45C",
-          highlight: "#FFC870",
-          label: "Yellow"
-        }
-      ];
+            data: [300, 50, 100],
+            backgroundColor: [
+                "#FF6384",
+                "#36A2EB",
+                "#FFCE56"
+            ],
+            hoverBackgroundColor: [
+                "#FF6384",
+                "#36A2EB",
+                "#FFCE56"
+            ]
+        }]
+	  };
 
       scope.addData = function() {
-        this.push('data', {
-          value: this.$.newValue.value,
-          color: this.$.newColor.value,
-          highlight: this.$.newHighlight.value,
-          label: this.$.newLabel.value
-        });
+        this.push('data.labels', this.$.newLabel.value);
+        this.push('data.datasets.0.hoverBackgroundColor', this.$.newHighlight.value);
+        this.push('data.datasets.0.backgroundColor', this.$.newColor.value);
+        this.push('data.datasets.0.data', this.$.newValue.value);
       };
 
       scope.resize = function() {

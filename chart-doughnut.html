@@ -1,7 +1,7 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-resizable-behavior/iron-resizable-behavior.html">
 <link rel="import" href="chart-js-import.html">
-<link rel="import" href="data-properties-behavior.html">
+<link rel="import" href="chart-property-behavior.html">
 <link rel="import" href="context-behavior.html">
 <link rel="import" href="resize-behavior.html">
 
@@ -20,26 +20,27 @@ They are also registered under two aliases in the Chart core. Other than their d
 
     ...
 
-    this.data = [
+    this.data = {
+      labels: [
+          "Red",
+          "Green",
+          "Yellow"
+      ],
+      datasets: [
       {
-        value: 300,
-        color:"#F7464A",
-        highlight: "#FF5A5E",
-        label: "Red"
-      },
-      {
-        value: 50,
-        color: "#46BFBD",
-        highlight: "#5AD3D1",
-        label: "Green"
-      },
-      {
-        value: 100,
-        color: "#FDB45C",
-        highlight: "#FFC870",
-        label: "Yellow"
-      }
-    ];
+          data: [300, 50, 100],
+          backgroundColor: [
+              "#FF6384",
+              "#36A2EB",
+              "#FFCE56"
+          ],
+          hoverBackgroundColor: [
+              "#FF6384",
+              "#36A2EB",
+              "#FFCE56"
+          ]
+      }]
+    };
 
 @group Chart Elements
 @element chart-doughnut
@@ -64,26 +65,15 @@ They are also registered under two aliases in the Chart core. Other than their d
 
       behaviors: [
         Polymer.IronResizableBehavior,
-        ChartBehaviors.DataPropertiesBehavior,
+        ChartBehaviors.ChartPropertyBehavior,
         ChartBehaviors.ContextBehavior,
         ChartBehaviors.ResizeBehavior
       ],
 
-      updateChart: function () {
-
-        this.async(function () {
-
-          if (this.chart) {
-            this.chart.destroy();
-          }
-
-          this.async(function() {
-            this.chart = new Chart(this.ctx).Doughnut(this.data, this.options);
-          }, null, 0);
-
-        }, null, 0);
-
+      ready: function() {
+        this._setType('doughnut');
       }
+
 
     });
   </script>

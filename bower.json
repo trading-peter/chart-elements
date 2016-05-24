@@ -1,8 +1,9 @@
 {
   "name": "chart-elements",
-  "version": "2.0.2",
+  "version": "3.0.0",
   "authors": [
-    "Rob Dodson"
+    "Rob Dodson",
+    "Diogo Moura"
   ],
   "description": "A custom element implementation of the Chart.js library",
   "keywords": [
@@ -18,9 +19,9 @@
     "/test/"
   ],
   "dependencies": {
-    "Chart.js": "chartjs#^1.0.2",
     "polymer": "Polymer/polymer#^1.1.0",
-    "iron-resizable-behavior": "PolymerElements/iron-resizable-behavior#~1.0.2"
+    "iron-resizable-behavior": "PolymerElements/iron-resizable-behavior#~1.0.2",
+    "Chart.js": "^2.1.3"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
