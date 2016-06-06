@@ -1,6 +1,10 @@
 {
   "name": "chart-elements",
+<<<<<<< HEAD
   "version": "3.0.0",
+=======
+  "version": "3.0.1",
+>>>>>>> refs/remotes/robdodson/master
   "authors": [
     "Rob Dodson",
     "Diogo Moura"
