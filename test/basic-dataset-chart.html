@@ -58,12 +58,18 @@
 
         test('will render', function(done) {
           expect(chartEl.chart).to.be.undefined;
+
+          chartEl.options = {
+            animation: {
+              onComplete: function() {
+                expect(chartEl.chart).to.not.be.undefined;
+                expect(chartEl.chart.scales['x-axis-0'].width).to.be.above(0);
+                done();
+              }
+            }
+          };
+
           chartEl.data = data;
-          setTimeout(function() {
-            expect(chartEl.chart).to.not.be.undefined;
-            expect(chartEl.chart.scales['x-axis-0'].width).to.be.above(0);
-            done();
-          }, 100);
         });
       });
 
