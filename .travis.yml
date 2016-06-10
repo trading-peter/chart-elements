@@ -16,7 +16,7 @@ before_script:
 - bower install
 script:
 - xvfb-run wct --skip-plugin sauce
-- "if [ \"${TRAVIS_PULL_REQUEST}\" = \"false\" ]; then wct -s default; fi"
+- if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then wct --skip-plugin local; fi
 env:
   global:
   - secure: HhS4N2bbHnSipXgLGU+WWABDmpWDk7TNfjEu8i5znymEimysBqnVhPvsoAz13VAsShOQN4j+lR41YJiaq8yM2OmXftyQ0tOrSkwPr5RE5Y2v989wXocnA3VxKzAaiIjL3awmZJkORVozONSLCBc8wgtO+sTzLiwxl+Lu3d50IaU=
