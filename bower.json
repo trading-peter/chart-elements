@@ -25,6 +25,6 @@
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
-    "web-component-tester": "Polymer/web-component-tester#^3.4.2"
+    "web-component-tester": "Polymer/web-component-tester#^4.2.2"
   }
 }
