@@ -37,11 +37,13 @@
         } else {
 
           this.async(function () {
-            this.chart = new Chart(this.ctx, {
-              type: this.type,
-              data: this.data,
-              options: this.options
-            });
+            if (this.hasData) {
+              this.chart = new Chart(this.ctx, {
+                type: this.type,
+                data: this.data,
+                options: this.options
+              });
+            }
           }, null, 0);
 
         }
