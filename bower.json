@@ -1,9 +1,10 @@
 {
   "name": "chart-elements",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "authors": [
     "Rob Dodson",
-    "Diogo Moura"
+    "Diogo Moura",
+    "Peter Kaske"
   ],
   "description": "A custom element implementation of the Chart.js library",
   "keywords": [
