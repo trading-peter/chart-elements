@@ -13,7 +13,7 @@
     "seed"
   ],
   "main": "chart-elements.html",
-  "license": "http://robdodson.mit-license.org/",
+  "license": "MIT",
   "homepage": "https://robdodson.github.io/chart-elements",
   "ignore": [
     "/.*",
