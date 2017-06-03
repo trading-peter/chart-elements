@@ -1,52 +1,54 @@
 <script>
   var ChartBehaviors = ChartBehaviors || {};
   /** @polymerBehavior */
-  ChartBehaviors.ChartPropertyBehavior = {
+  ChartBehaviors.ChartPropertyBehavior = Polymer.dedupingMixin(function(superClass) {
+    return class extends superClass {
+      static get properties() {
+        return {
+          type: {
+            type: String,
+            readOnly: true,
+            value: 'bar',
+          },
 
-    properties: {
+          chart: {
+            notify: true
+          },
 
-      type: {
-        type: String,
-        readOnly: true,
-        value: 'bar',
-      },
+          data: {
+            type: Object,
+            value: function () {
+              return {};
+            }
+          },
 
-      chart: {
-        notify: true
-      },
-
-      data: {
-        type: Object,
-        value: function () {
-          return {};
-        }
-      },
-
-      options: {
-        type: Object,
-        value: function () {
-          return {};
-        }
-      },
-
-    },
-
-    observers: [
-      '_configurationChanged(data.*, options.*)'
-    ],
-
-    _configurationChanged: function(dataRecord, optionsRecord) {
-      if (dataRecord.base.labels && dataRecord.base.datasets) {
-        this.hasData = true;
-      } else {
-        this.hasData = false;
+          options: {
+            type: Object,
+            value: function () {
+              return {};
+            }
+          }
+        };
       }
 
-      if (this.hasData && this.isAttached) {
-        this._queue();
+      static get observers() {
+        return [
+          '_configurationChanged(data.*, options.*)'
+        ];
+      }
+
+      _configurationChanged(dataRecord, optionsRecord) {
+        if (dataRecord.base.labels && dataRecord.base.datasets) {
+          this.hasData = true;
+        } else {
+          this.hasData = false;
+        }
+
+        if (this.hasData && this.isAttached) {
+          this._queue();
+        }
       }
     }
-
-  };
+  });
 
 </script>

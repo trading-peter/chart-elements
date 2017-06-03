@@ -27,20 +27,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <body unresolved>
 
-  <template is="dom-bind">
+  <dom-bind>
+    <template>
 
-    <iron-pages selected="[[selected]]">
-      <section>
-        <p>Page 1</p>
-      </section>
-      <section>
-        <chart-pie id="chart" class="my-chart" data="[[data]]"></chart-pie>
-      </section>
-    </iron-pages>
+      <iron-pages selected="[[selected]]">
+        <section>
+          <p>Page 1</p>
+        </section>
+        <section>
+          <chart-pie id="chart" class="my-chart" data="[[data]]"></chart-pie>
+        </section>
+      </iron-pages>
 
-    <button on-tap="next">Next</button>
+      <button on-tap="next">Next</button>
 
-  </template>
+    </template>
+  </dom-bind>
 
   <script>
     var scope = document.querySelector('template');

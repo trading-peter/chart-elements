@@ -56,21 +56,17 @@ This type of chart is often useful when we want to show a comparison data simila
   </template>
 
   <script>
-    Polymer({
+    class ChartPolarArea extends ChartBehaviors.ResizeBehavior(ChartBehaviors.ContextBehavior(ChartBehaviors.ChartPropertyBehavior(Polymer.mixinBehaviors([Polymer.IronResizableBehavior], Polymer.Element)))) {
 
-      is: 'chart-polar-area',
+      static get is() { return 'chart-polar-area'; }
 
-      behaviors: [
-        Polymer.IronResizableBehavior,
-        ChartBehaviors.ChartPropertyBehavior,
-        ChartBehaviors.ContextBehavior,
-        ChartBehaviors.ResizeBehavior
-      ],
-
-      ready: function() {
+      ready() {
+        super.ready();
         this._setType('polarArea');
       }
 
-    });
+    };
+
+    window.customElements.define(ChartPolarArea.is, ChartPolarArea);
   </script>
 </dom-module>

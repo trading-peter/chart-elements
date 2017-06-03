@@ -61,22 +61,18 @@ They are also registered under two aliases in the Chart core. Other than their d
   </template>
 
   <script>
-    Polymer({
+    class ChartPie extends ChartBehaviors.ResizeBehavior(ChartBehaviors.ContextBehavior(ChartBehaviors.ChartPropertyBehavior(Polymer.mixinBehaviors([Polymer.IronResizableBehavior], Polymer.Element)))) {
 
-      is: 'chart-pie',
+      static get is() { return 'chart-pie'; }
 
-      behaviors: [
-        Polymer.IronResizableBehavior,
-        ChartBehaviors.ChartPropertyBehavior,
-        ChartBehaviors.ContextBehavior,
-        ChartBehaviors.ResizeBehavior
-      ],
-
-      ready: function() {
+      ready() {
+        super.ready();
         this._setType('pie');
       }
 
-    });
+    };
+
+    window.customElements.define(ChartPie.is, ChartPie);
   </script>
 
 </dom-module>
