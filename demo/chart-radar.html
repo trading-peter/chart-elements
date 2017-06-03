@@ -21,80 +21,82 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <body unresolved>
 
-    <template is="dom-bind">
+    <dom-bind>
+      <template>
 
-      <chart-radar id="chart" class="rectangular-chart" data="[[data]]"></chart-radar>
+        <chart-radar id="chart" class="rectangular-chart" data="[[data]]"></chart-radar>
 
-      <div class="controls">
+        <div class="controls">
 
-        <div class="control-group">
+          <div class="control-group">
 
-          <label>
-            Label
-            <input id="newLabel" type="text" value="My Third Dataset">
-          </label>
+            <label>
+              Label
+              <input id="newLabel" type="text" value="My Third Dataset">
+            </label>
 
-          <label>
-            Fill Color
-            <input id="newFillColor" type="text" value="rgba(95,125,140,0.2)">
-          </label>
+            <label>
+              Fill Color
+              <input id="newFillColor" type="text" value="rgba(95,125,140,0.2)">
+            </label>
 
-          <label>
-            Stroke Color
-            <input id="newStrokeColor" type="text" value="rgba(95,125,140,1)">
-          </label>
+            <label>
+              Stroke Color
+              <input id="newStrokeColor" type="text" value="rgba(95,125,140,1)">
+            </label>
 
-          <label>
-            Point Color
-            <input id="newPointColor" type="text" value="rgba(95,125,140,1)">
-          </label>
+            <label>
+              Point Color
+              <input id="newPointColor" type="text" value="rgba(95,125,140,1)">
+            </label>
 
-          <label>
-            Point Stroke Color
-            <input id="newPointStrokeColor" type="text" value="#fff">
-          </label>
+            <label>
+              Point Stroke Color
+              <input id="newPointStrokeColor" type="text" value="#fff">
+            </label>
 
-          <label>
-            Point Highlight Fill
-            <input id="newPointHighlightFill" type="text" value="#fff">
-          </label>
+            <label>
+              Point Highlight Fill
+              <input id="newPointHighlightFill" type="text" value="#fff">
+            </label>
 
-          <label>
-            Point Highlight Stroke
-            <input id="newPointHighlightStroke" type="text" value="rgba(95,125,140,1)">
-          </label>
+            <label>
+              Point Highlight Stroke
+              <input id="newPointHighlightStroke" type="text" value="rgba(95,125,140,1)">
+            </label>
 
-          <label>
-            Data
-            <input id="newData" type="text" value="15, 22, 45, 39, 77, 88, 30">
-          </label>
+            <label>
+              Data
+              <input id="newData" type="text" value="15, 22, 45, 39, 77, 88, 30">
+            </label>
 
-          <button type="button" name="button" on-tap="addData">Add data</button>
+            <button type="button" name="button" on-tap="addData">Add data</button>
+
+          </div>
+
+          <div class="control-group">
+
+            <label>
+              Width
+              <input id="newWidth" type="text" value="300px">
+            </label>
+
+            <label>
+              Height
+              <input id="newHeight" type="text" value="150px">
+            </label>
+
+            <button type="button" name="button" on-tap="resize">Resize</button>
+
+          </div>
 
         </div>
 
-        <div class="control-group">
-
-          <label>
-            Width
-            <input id="newWidth" type="text" value="300px">
-          </label>
-
-          <label>
-            Height
-            <input id="newHeight" type="text" value="150px">
-          </label>
-
-          <button type="button" name="button" on-tap="resize">Resize</button>
-
-        </div>
-
-      </div>
-
-    </template>
+      </template>
+    </dom-bind>
 
     <script>
-      var scope = document.querySelector('template');
+      var scope = document.querySelector('dom-bind');
 
       scope.data = {
         labels: ["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"],

@@ -25,60 +25,62 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <body unresolved>
 
-    <template is="dom-bind">
+    <dom-bind>
+      <template>
 
-      <chart-pie id="chart" class="square-chart" data="[[data]]"></chart-pie>
+        <chart-pie id="chart" class="square-chart" data="[[data]]"></chart-pie>
 
-      <div class="controls">
+        <div class="controls">
 
-        <div class="control-group">
+          <div class="control-group">
 
-          <label>
-            Value
-            <input id="newValue" type="text" value="200">
-          </label>
+            <label>
+              Value
+              <input id="newValue" type="text" value="200">
+            </label>
 
-          <label>
-            Color
-            <input id="newColor" type="text" value="#949FB1">
-          </label>
+            <label>
+              Color
+              <input id="newColor" type="text" value="#949FB1">
+            </label>
 
-          <label>
-            Highlight
-            <input id="newHighlight" type="text" value="#A8B3C5">
-          </label>
+            <label>
+              Highlight
+              <input id="newHighlight" type="text" value="#A8B3C5">
+            </label>
 
-          <label>
-            Label
-            <input id="newLabel" type="text" value="Grey">
-          </label>
+            <label>
+              Label
+              <input id="newLabel" type="text" value="Grey">
+            </label>
 
-          <button type="button" name="button" on-tap="addData">Add data</button>
+            <button type="button" name="button" on-tap="addData">Add data</button>
+
+          </div>
+
+          <div class="control-group">
+
+            <label>
+              Width
+              <input id="newWidth" type="text" value="150px">
+            </label>
+
+            <label>
+              Height
+              <input id="newHeight" type="text" value="150px">
+            </label>
+
+            <button type="button" name="button" on-tap="resize">Resize</button>
+
+          </div>
 
         </div>
 
-        <div class="control-group">
-
-          <label>
-            Width
-            <input id="newWidth" type="text" value="150px">
-          </label>
-
-          <label>
-            Height
-            <input id="newHeight" type="text" value="150px">
-          </label>
-
-          <button type="button" name="button" on-tap="resize">Resize</button>
-
-        </div>
-
-      </div>
-
-    </template>
+      </template>
+    </dom-bind>
 
     <script>
-      var scope = document.querySelector('template');
+      var scope = document.querySelector('dom-bind');
 
       scope.data = {
         labels: [
