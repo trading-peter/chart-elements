@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>chart-elements demo</title>
+
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+
+    <script type="module">
+      import '@polymer/iron-demo-helpers/demo-pages-shared-styles';
+      import '@polymer/iron-demo-helpers/demo-snippet';
+    </script>
+
+    <script type="module" src="../chart-bar.js"></script>
+    <script type="module" src="../chart-doughnut.js"></script>
+    <script type="module" src="../chart-line.js"></script>
+    <script type="module" src="../chart-pie.js"></script>
+    <script type="module" src="../chart-radar.js"></script>
+    <script type="module" src="../chart-horizontal-bar.js"></script>
+    <script type="module" src="../chart-polar-area.js"></script>
+    <script type="module" src="../chart-bubble.js"></script>
+
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+        chart-bar,
+        chart-doughnut,
+        chart-pie,
+        chart-line,
+        chart-radar,
+        chart-horizontal-bar,
+        chart-bubble,
+        chart-polar-area {
+          width: 100%;
+        }
+      </style>
+    </custom-style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+      <h3>chart-bar demo</h3>
+      <demo-snippet>
+        <template>
+          <chart-bar id="chart1"></chart-bar>
+
+          <script>
+            document.querySelector('#chart1').data = {
+              labels: ["January", "February", "March", "April", "May", "June", "July"],
+              datasets: [
+                {
+                  label: "My First dataset",
+                  backgroundColor: "rgba(220,220,220,0.2)",
+                  borderColor: "rgba(220,220,220,1)",
+                  borderWidth: 1,
+                  data: [65, 59, 80, 81, 56, 55, 40]
+                },
+                {
+                  label: "My Second dataset",
+                  backgroundColor: "rgba(151,187,205,0.2)",
+                  borderColor: "rgba(151,187,205,1)",
+                  borderWidth: 1,
+                  data: [28, 48, 40, 19, 86, 27, 90]
+                }
+              ]
+            };
+          </script>
+        </template>
+      </demo-snippet>
+    </div>
+
+    <div class="vertical-section-container centered">
+      <h3>chart-doughnut demo</h3>
+      <demo-snippet>
+        <template>
+          <chart-doughnut id="chart2"></chart-doughnut>
+
+          <script>
+            document.querySelector('#chart2').data = {
+              labels: [
+                "Red",
+                "Green",
+                "Yellow"
+              ],
+              datasets: [{
+                data: [300, 50, 100],
+                backgroundColor: [
+                  "#FF6384",
+                  "#36A2EB",
+                  "#FFCE56"
+                ],
+                hoverBackgroundColor: [
+                  "#FF6384",
+                  "#36A2EB",
+                  "#FFCE56"
+                ]
+              }]
+            };
+          </script>
+        </template>
+      </demo-snippet>
+    </div>
+
+    <div class="vertical-section-container centered">
+      <h3>chart-line demo</h3>
+      <demo-snippet>
+        <template>
+          <chart-line id="chart3"></chart-line>
+
+          <script>
+            document.querySelector('#chart3').data = {
+              labels: ["January", "February", "March", "April", "May", "June", "July"],
+              datasets: [
+                {
+                  label: "My First dataset",
+                  backgroundColor: "rgba(220,220,220,0.2)",
+                  borderColor: "rgba(220,220,220,1)",
+                  borderWidth: 1,
+                  pointBackgroundColor: "rgba(220,220,220,1)",
+                  pointBorderColor: "#fff",
+                  pointHoverBackgroundColor: "#fff",
+                  pointHoverBorderColor: "rgba(220,220,220,1)",
+                  data: [65, 59, 80, 81, 56, 55, 40]
+                },
+                {
+                  label: "My Second dataset",
+                  backgroundColor: "rgba(151,187,205,0.2)",
+                  borderColor: "rgba(151,187,205,1)",
+                  borderWidth: 1,
+                  pointBackgroundColor: "rgba(151,187,205,1)",
+                  pointBorderColor: "#fff",
+                  pointHighlightFill: "#fff",
+                  pointHoverBorderColor: "rgba(151,187,205,1)",
+                  data: [28, 48, 40, 19, 86, 27, 90]
+                }
+              ]
+            };
+          </script>
+        </template>
+      </demo-snippet>
+    </div>
+
+    <div class="vertical-section-container centered">
+      <h3>chart-pie demo</h3>
+      <demo-snippet>
+        <template>
+          <chart-pie id="chart4"></chart-pie>
+
+          <script>
+            document.querySelector('#chart4').data = {
+              labels: [
+                "Red",
+                "Green",
+                "Yellow"
+              ],
+              datasets: [{
+                data: [300, 50, 100],
+                backgroundColor: [
+                  "#FF6384",
+                  "#36A2EB",
+                  "#FFCE56"
+                ],
+                hoverBackgroundColor: [
+                  "#FF6384",
+                  "#36A2EB",
+                  "#FFCE56"
+                ]
+              }]
+            };
+          </script>
+        </template>
+      </demo-snippet>
+    </div>
+
+    <div class="vertical-section-container centered">
+      <h3>chart-polar-area demo</h3>
+      <demo-snippet>
+        <template>
+          <chart-polar-area id="chart5"></chart-polar-area>
+
+          <script>
+            document.querySelector('#chart5').data = {
+              datasets: [{
+                data: [
+                  11,
+                  16,
+                  7,
+                ],
+                backgroundColor: [
+                  "#FF6384",
+                  "#4BC0C0",
+                  "#FFCE56",
+                ],
+                label: 'My dataset' // for legend
+              }],
+              labels: [
+                "Red",
+                "Green",
+                "Yellow"
+              ]
+            };
+          </script>
+        </template>
+      </demo-snippet>
+    </div>
+
+    <div class="vertical-section-container centered">
+      <h3>chart-radar demo</h3>
+      <demo-snippet>
+        <template>
+          <chart-radar id="chart6"></chart-radar>
+
+          <script>
+            document.querySelector('#chart6').data = {
+              labels: ["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"],
+              datasets: [{
+                label: "My First dataset",
+                backgroundColor: "rgba(179,181,198,0.2)",
+                borderColor: "rgba(179,181,198,1)",
+                pointBackgroundColor: "rgba(179,181,198,1)",
+                pointBorderColor: "#fff",
+                pointHoverBackgroundColor: "#fff",
+                pointHoverBorderColor: "rgba(179,181,198,1)",
+                data: [65, 59, 90, 81, 56, 55, 40]
+              },
+              {
+                label: "My Second dataset",
+                backgroundColor: "rgba(255,99,132,0.2)",
+                borderColor: "rgba(255,99,132,1)",
+                pointBackgroundColor: "rgba(255,99,132,1)",
+                pointBorderColor: "#fff",
+                pointHoverBackgroundColor: "#fff",
+                pointHoverBorderColor: "rgba(255,99,132,1)",
+                data: [28, 48, 40, 19, 96, 27, 100]
+              }]
+            };
+          </script>
+        </template>
+      </demo-snippet>
+    </div>
+
+    <div class="vertical-section-container centered">
+      <h3>chart-bubble demo</h3>
+      <demo-snippet>
+        <template>
+          <chart-bubble id="chart7"></chart-bubble>
+
+          <script>
+            document.querySelector('#chart7').data = {
+              label: ['Deer Population'],
+              data: [{
+                x: 100,
+                y: 0,
+                r: 10
+              }, {
+                x: 60,
+                y: 30,
+                r: 20
+              }, {
+                x: 40,
+                y: 60,
+                r: 25
+              }, {
+                x: 80,
+                y: 80,
+                r: 50
+              }, {
+                x: 20,
+                y: 30,
+                r: 25
+              }, {
+                x: 0,
+                y: 100,
+                r: 5
+              }],
+              backgroundColor: "#FF9966"
+            };
+          </script>
+        </template>
+      </demo-snippet>
+    </div>
+
+    <div class="vertical-section-container centered">
+      <h3>chart-horizontal-bar demo</h3>
+      <demo-snippet>
+        <template>
+          <chart-horizontal-bar id="chart8"></chart-horizontal-bar>
+
+          <script>
+            document.querySelector('#chart8').data = {
+              labels: ["January", "February", "March", "April", "May", "June", "July"],
+              datasets: [
+                {
+                  label: "My First dataset",
+                  backgroundColor: "rgba(220,220,220,0.2)",
+                  borderColor: "rgba(220,220,220,1)",
+                  borderWidth: 1,
+                  data: [65, 59, 80, 81, 56, 55, 40]
+                },
+                {
+                  label: "My Second dataset",
+                  backgroundColor: "rgba(151,187,205,0.2)",
+                  borderColor: "rgba(151,187,205,1)",
+                  borderWidth: 1,
+                  data: [28, 48, 40, 19, 86, 27, 90]
+                }
+              ]
+            };
+          </script>
+        </template>
+      </demo-snippet>
+    </div>
+  </body>
+</html>

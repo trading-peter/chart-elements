@@ -1,11 +1,9 @@
-<link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../iron-resizable-behavior/iron-resizable-behavior.html">
-<link rel="import" href="chart-js-import.html">
-<link rel="import" href="chart-property-behavior.html">
-<link rel="import" href="context-behavior.html">
-<link rel="import" href="resize-behavior.html">
+import { LitElement } from '@polymer/lit-element';
+import { ChartPropertyMixin } from './chart-property-mixin';
+import { ContextMixin } from './context-mixin';
+import { ResizeMixin } from './resize-mixin.js';
 
-<!--
+/**
 A line chart is a way of plotting data points on a line.
 
 Often, it is used to show trend data, and the comparison of two data sets.
@@ -47,33 +45,14 @@ Often, it is used to show trend data, and the comparison of two data sets.
 @group Chart Elements
 @element chart-line
 @demo demo/chart-line.html
--->
+*/
+class ChartLine extends ResizeMixin(ContextMixin(ChartPropertyMixin(LitElement))) {
 
-<link rel="import" href="chart-styles.html">
-<dom-module id="chart-line">
+  constructor() {
+    super();
+    this.__type = 'line';
+  }
 
-  <template>
+}
 
-    <style include="chart-styles"></style>
-
-    <div>
-      <canvas id="canvas"></canvas>
-    </div>
-
-  </template>
-
-  <script>
-    class ChartLine extends ChartBehaviors.ResizeBehavior(ChartBehaviors.ContextBehavior(ChartBehaviors.ChartPropertyBehavior(Polymer.mixinBehaviors([Polymer.IronResizableBehavior], Polymer.Element)))) {
-
-      static get is() { return 'chart-line'; }
-
-      ready() {
-        super.ready();
-        this._setType('line');
-      }
-
-    };
-
-    window.customElements.define(ChartLine.is, ChartLine);
-  </script>
-</dom-module>
+window.customElements.define('chart-line', ChartLine);

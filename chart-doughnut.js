@@ -1,11 +1,9 @@
-<link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../iron-resizable-behavior/iron-resizable-behavior.html">
-<link rel="import" href="chart-js-import.html">
-<link rel="import" href="chart-property-behavior.html">
-<link rel="import" href="context-behavior.html">
-<link rel="import" href="resize-behavior.html">
+import { LitElement, html } from '@polymer/lit-element';
+import { ChartPropertyMixin } from './chart-property-mixin';
+import { ContextMixin } from './context-mixin';
+import { ResizeMixin } from './resize-mixin.js';
 
-<!--
+/**
 Pie and doughnut charts are probably the most commonly used chart there are. They are divided into segments, the arc of each segment shows a the proportional value of each piece of data.
 
 They are excellent at showing the relational proportions between data.
@@ -45,34 +43,14 @@ They are also registered under two aliases in the Chart core. Other than their d
 @group Chart Elements
 @element chart-doughnut
 @demo demo/chart-doughnut.html
--->
+*/
+class ChartDoughnut extends ResizeMixin(ContextMixin(ChartPropertyMixin(LitElement))) {
 
-<link rel="import" href="chart-styles.html">
-<dom-module id="chart-doughnut">
+  constructor() {
+    super();
+    this.__type = 'doughnut';
+  }
 
-  <template>
+}
 
-    <style include="chart-styles"></style>
-
-    <div>
-      <canvas id="canvas"></canvas>
-    </div>
-
-  </template>
-
-  <script>
-    class ChartDoughnut extends ChartBehaviors.ResizeBehavior(ChartBehaviors.ContextBehavior(ChartBehaviors.ChartPropertyBehavior(Polymer.mixinBehaviors([Polymer.IronResizableBehavior], Polymer.Element)))) {
-
-      static get is() { return 'chart-doughnut' }
-
-      ready() {
-        super.ready();
-        this._setType('doughnut');
-      }
-
-    };
-
-    window.customElements.define(ChartDoughnut.is, ChartDoughnut);
-  </script>
-
-</dom-module>
+window.customElements.define('chart-doughnut', ChartDoughnut);
