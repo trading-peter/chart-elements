@@ -16,13 +16,11 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@polymer/iron-resizable-behavior": "^3.0.0-pre.18",
-    "@polymer/lit-element": "^0.5.1",
-    "@polymer/polymer": "^3.0.0"
+    "lit-element": "^2.0.1"
   },
   "devDependencies": {
-    "@polymer/iron-demo-helpers": "^3.0.0-pre.19",
-    "@webcomponents/webcomponentsjs": "^2.0.0",
-    "wct-browser-legacy": "^1.0.0"
+    "@polymer/iron-demo-helpers": "^3.0.0",
+    "@webcomponents/webcomponentsjs": "^2.2.7",
+    "wct-browser-legacy": "^1.0.2"
   }
 }

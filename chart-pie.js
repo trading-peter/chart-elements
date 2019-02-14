@@ -1,4 +1,4 @@
-import { LitElement } from '@polymer/lit-element';
+import { LitElement } from 'lit-element/lit-element.js';
 import { ChartPropertyMixin } from './chart-property-mixin';
 import { ContextMixin } from './context-mixin';
 import { ResizeMixin } from './resize-mixin.js';
@@ -42,7 +42,6 @@ They are also registered under two aliases in the Chart core. Other than their d
 
 @group Chart Elements
 @element chart-pie
-@demo demo/chart-pie.html
 */
 class ChartPie extends ResizeMixin(ContextMixin(ChartPropertyMixin(LitElement))) {
 

@@ -23,33 +23,33 @@
   </test-fixture>
 
   <script type="module">
-import '../chart-bar.js';
-suite('basic dataset chart', function() {
-  var chartEl;
-  var chart;
-  var data = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
-    datasets: [
-      {
-        label: "My First dataset",
-        backgroundColor: "rgba(255,99,132,0.2)",
-        borderColor: "rgba(255,99,132,1)",
-        borderWidth: 1,
-        hoverBackgroundColor: "rgba(255,99,132,0.4)",
-        hoverBorderColor: "rgba(255,99,132,1)",
-        data: [65, 59, 80, 81, 56, 55, 40]
-      },
-      {
-        label: "My Second dataset",
-        backgroundColor: "rgba(69, 115, 251, 0.2)",
-        borderColor: "rgba(99, 124, 255, 1)",
-        borderWidth: 1,
-        hoverBackgroundColor: "rgba(99, 199, 255, 0.4)",
-        hoverBorderColor: "rgba(99, 185, 255, 1)",
-        data: [28, 48, 40, 19, 86, 27, 90]
-      }
-    ]
-  };
+  import '../chart-bar.js';
+  suite('basic dataset chart', function() {
+    var chartEl;
+    var chart;
+    var data = {
+      labels: ["January", "February", "March", "April", "May", "June", "July"],
+      datasets: [
+        {
+          label: "My First dataset",
+          backgroundColor: "rgba(255,99,132,0.2)",
+          borderColor: "rgba(255,99,132,1)",
+          borderWidth: 1,
+          hoverBackgroundColor: "rgba(255,99,132,0.4)",
+          hoverBorderColor: "rgba(255,99,132,1)",
+          data: [65, 59, 80, 81, 56, 55, 40]
+        },
+        {
+          label: "My Second dataset",
+          backgroundColor: "rgba(69, 115, 251, 0.2)",
+          borderColor: "rgba(99, 124, 255, 1)",
+          borderWidth: 1,
+          hoverBackgroundColor: "rgba(99, 199, 255, 0.4)",
+          hoverBorderColor: "rgba(99, 185, 255, 1)",
+          data: [28, 48, 40, 19, 86, 27, 90]
+        }
+      ]
+    };
 
   suite('when setting data property', function() {
 

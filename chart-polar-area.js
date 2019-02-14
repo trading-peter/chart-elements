@@ -1,4 +1,4 @@
-import { LitElement } from '@polymer/lit-element';
+import { LitElement } from 'lit-element/lit-element.js';
 import { ChartPropertyMixin } from './chart-property-mixin';
 import { ContextMixin } from './context-mixin';
 import { ResizeMixin } from './resize-mixin.js';
@@ -38,7 +38,6 @@ This type of chart is often useful when we want to show a comparison data simila
 
 @group Chart Elements
 @element chart-polar-area
-@demo demo/chart-polar-area.html
 */
 class ChartPolarArea extends ResizeMixin(ContextMixin(ChartPropertyMixin(LitElement))) {
 

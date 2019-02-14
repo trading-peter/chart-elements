@@ -1,4 +1,4 @@
-import { LitElement } from '@polymer/lit-element';
+import { LitElement } from 'lit-element/lit-element.js';
 import { ChartPropertyMixin } from './chart-property-mixin';
 import { ContextMixin } from './context-mixin';
 import { ResizeMixin } from './resize-mixin.js';
@@ -44,7 +44,6 @@ Often, it is used to show trend data, and the comparison of two data sets.
 
 @group Chart Elements
 @element chart-line
-@demo demo/chart-line.html
 */
 class ChartLine extends ResizeMixin(ContextMixin(ChartPropertyMixin(LitElement))) {
 

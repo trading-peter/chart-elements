@@ -1,4 +1,4 @@
-import { LitElement } from '@polymer/lit-element';
+import { LitElement } from 'lit-element/lit-element.js';
 import { ChartPropertyMixin } from './chart-property-mixin';
 import { ContextMixin } from './context-mixin';
 import { ResizeMixin } from './resize-mixin.js';

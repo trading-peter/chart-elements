@@ -1,4 +1,4 @@
-import { LitElement } from '@polymer/lit-element';
+import { LitElement } from 'lit-element/lit-element.js';
 import { ChartPropertyMixin } from './chart-property-mixin';
 import { ContextMixin } from './context-mixin';
 import { ResizeMixin } from './resize-mixin.js';
@@ -40,7 +40,6 @@ They are often useful for comparing the points of two or more different data set
 
 @group Chart Elements
 @element chart-radar
-@demo demo/chart-radar.html
 */
 class ChartRadar extends ResizeMixin(ContextMixin(ChartPropertyMixin(LitElement))) {
 

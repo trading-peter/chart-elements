@@ -1,5 +1,4 @@
-import { html } from '@polymer/lit-element';
-import { style } from './chart-styles.js';
+import { html, css } from 'lit-element/lit-element.js';
 
 /**
  * Adds basic properties to all chart elements.
@@ -21,25 +20,38 @@ export const ChartPropertyMixin = function(superClass) {
       this.__hasData = false;
     }
 
-    _render() {
+    static get styles() {
+      return css`
+        :host {
+          display: inline-block;
+          position: relative;
+        }
+
+        :host > div {
+          height: 100%;
+        }
+
+        #canvas {
+          width: 100%;
+          height: 100%;
+        }
+      `;
+    }
+
+    render() {
       return html`
-        ${this._renderStyle()}
         <div>
           <canvas id="canvas"></canvas>
         </div>
       `;
     }
 
-    _renderStyle() {
-      return style;
-    }
-
-    _shouldRender(props, changedProps) {
-      if ('data' in changedProps || 'options' in changedProps) {
+    shouldUpdate(changes) {
+      if (changes.has('data') || changes.has('options')) {
         this._configurationChanged(this.data, this.options);
       }
 
-      if ('chart' in changedProps) {
+      if (changes.has('chart')) {
         this.dispatchEvent(new CustomEvent('chart-changed', { detail: this.chart, bubbles: true, composed: true }));
         return false;
       }
@@ -47,14 +59,14 @@ export const ChartPropertyMixin = function(superClass) {
       return true;
     }
 
-    _didRender() {
+    updated() {
       if (this.__hasData && this.isConnected) {
         this._queue();
       }
     }
 
     _configurationChanged(data) {
-      if (data.labels && data.datasets) {
+      if ((this.__type === 'bubble' || data.labels) && data.datasets) {
         this.__hasData = true;
       } else {
         this.__hasData = false;

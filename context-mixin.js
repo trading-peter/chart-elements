@@ -56,7 +56,7 @@ export const ContextMixin = function(superClass) {
 
     connectedCallback() {
       super.connectedCallback();
-      this.renderComplete.then(() => {
+      this.updateComplete.then(() => {
         this.ctx = this.shadowRoot.querySelector('#canvas').getContext('2d');
         this._queue();
       });

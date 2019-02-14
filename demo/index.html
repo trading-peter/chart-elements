@@ -8,21 +8,20 @@
 
     <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
 
     <script type="module">
       import '@polymer/iron-demo-helpers/demo-pages-shared-styles';
       import '@polymer/iron-demo-helpers/demo-snippet';
+      import '../chart-bar.js';
+      import '../chart-doughnut.js';
+      import '../chart-line.js';
+      import '../chart-pie.js';
+      import '../chart-radar.js';
+      import '../chart-horizontal-bar.js';
+      import '../chart-polar-area.js';
+      import '../chart-bubble.js';
     </script>
-
-    <script type="module" src="../chart-bar.js"></script>
-    <script type="module" src="../chart-doughnut.js"></script>
-    <script type="module" src="../chart-line.js"></script>
-    <script type="module" src="../chart-pie.js"></script>
-    <script type="module" src="../chart-radar.js"></script>
-    <script type="module" src="../chart-horizontal-bar.js"></script>
-    <script type="module" src="../chart-polar-area.js"></script>
-    <script type="module" src="../chart-bubble.js"></script>
 
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles">
@@ -249,33 +248,37 @@
 
           <script>
             document.querySelector('#chart7').data = {
-              label: ['Deer Population'],
-              data: [{
-                x: 100,
-                y: 0,
-                r: 10
-              }, {
-                x: 60,
-                y: 30,
-                r: 20
-              }, {
-                x: 40,
-                y: 60,
-                r: 25
-              }, {
-                x: 80,
-                y: 80,
-                r: 50
-              }, {
-                x: 20,
-                y: 30,
-                r: 25
-              }, {
-                x: 0,
-                y: 100,
-                r: 5
-              }],
-              backgroundColor: "#FF9966"
+              datasets: [
+                {
+                  label: 'Deer Population',
+                  backgroundColor: "#FF9966",
+                  data: [{
+                    x: 100,
+                    y: 0,
+                    r: 10
+                  }, {
+                    x: 60,
+                    y: 30,
+                    r: 20
+                  }, {
+                    x: 40,
+                    y: 60,
+                    r: 25
+                  }, {
+                    x: 80,
+                    y: 80,
+                    r: 50
+                  }, {
+                    x: 20,
+                    y: 30,
+                    r: 25
+                  }, {
+                    x: 0,
+                    y: 100,
+                    r: 5
+                  }]
+                }
+              ]
             };
           </script>
         </template>
