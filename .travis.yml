@@ -3,21 +3,21 @@ sudo: required
 dist: trusty
 node_js: stable
 addons:
-  firefox: 46.0
+  firefox: 46
   sauce_connect: true
   apt:
     sources:
-    - google-chrome
+      - google-chrome
     packages:
-    - google-chrome-stable
+      - google-chrome-stable
 before_script:
-- npm install web-component-tester
-- npm install -g bower
-- bower install
+  - npm install web-component-tester
+  - npm install -g
 script:
-- xvfb-run wct --skip-plugin sauce
-- if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then wct --skip-plugin local; fi
+  - xvfb-run wct --module-resolution=node --npm --skip-plugin sauce
+  - 'if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then wct --module-resolution=node --npm --skip-plugin local; fi'
 env:
   global:
-  - secure: HhS4N2bbHnSipXgLGU+WWABDmpWDk7TNfjEu8i5znymEimysBqnVhPvsoAz13VAsShOQN4j+lR41YJiaq8yM2OmXftyQ0tOrSkwPr5RE5Y2v989wXocnA3VxKzAaiIjL3awmZJkORVozONSLCBc8wgtO+sTzLiwxl+Lu3d50IaU=
-  - secure: kNO2jpumBTojhBGGPhoR5uEhLypxnfBoiyNcu0PZVgOdkjrHIHMFtCzz8V/u8h9QuA/POpWpmyyYMVVJ6R6Js9U2lryjpUUqM9LwoM0Hv91FkJQDi/kVx8Znt3khN7fi9CXdbEEMTA1cc5jIfsnCE73G8WJy1/uL3p+eZAFH0/8=
+    - secure: HhS4N2bbHnSipXgLGU+WWABDmpWDk7TNfjEu8i5znymEimysBqnVhPvsoAz13VAsShOQN4j+lR41YJiaq8yM2OmXftyQ0tOrSkwPr5RE5Y2v989wXocnA3VxKzAaiIjL3awmZJkORVozONSLCBc8wgtO+sTzLiwxl+Lu3d50IaU=
+    - secure: kNO2jpumBTojhBGGPhoR5uEhLypxnfBoiyNcu0PZVgOdkjrHIHMFtCzz8V/u8h9QuA/POpWpmyyYMVVJ6R6Js9U2lryjpUUqM9LwoM0Hv91FkJQDi/kVx8Znt3khN7fi9CXdbEEMTA1cc5jIfsnCE73G8WJy1/uL3p+eZAFH0/8=
+

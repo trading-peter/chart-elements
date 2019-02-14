@@ -1,0 +1,26 @@
+{
+  "name": "chart-elements",
+  "main": "chart-elements.js",
+  "description": "A custom element implementation of the Chart.js library",
+  "keywords": [
+    "web-component",
+    "polymer",
+    "charts"
+  ],
+  "homepage": "https://robdodson.github.io/chart-elements",
+  "version": "5.0.0",
+  "contributors": [
+    "Rob Dodson",
+    "Diogo Moura",
+    "Peter Kaske"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "lit-element": "^2.0.1"
+  },
+  "devDependencies": {
+    "@polymer/iron-demo-helpers": "^3.0.0",
+    "@webcomponents/webcomponentsjs": "^2.2.7",
+    "wct-browser-legacy": "^1.0.2"
+  }
+}
