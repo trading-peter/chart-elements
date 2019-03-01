@@ -66,6 +66,7 @@ export const ChartPropertyMixin = function(superClass) {
     }
 
     _configurationChanged(data) {
+      if (!data) return;
       if ((this.__type === 'bubble' || data.labels) && data.datasets) {
         this.__hasData = true;
       } else {
