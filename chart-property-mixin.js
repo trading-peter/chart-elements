@@ -27,22 +27,16 @@ export const ChartPropertyMixin = function(superClass) {
           position: relative;
         }
 
-        :host > div {
-          height: 100%;
-        }
-
         #canvas {
-          width: 100%;
-          height: 100%;
+          width: 100% !important;
+          height: 100% !important;
         }
       `;
     }
 
     render() {
       return html`
-        <div>
-          <canvas id="canvas"></canvas>
-        </div>
+        <canvas id="canvas"></canvas>
       `;
     }
 
